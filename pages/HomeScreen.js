@@ -47,7 +47,8 @@ class RegistrationForm extends Component {
         <Button 
             buttonText={'Sign Up'}
             onButtonPress={this.onButtonPress.bind(this)}
-        />);
+        />
+        );
   }
 
 //   onLoginSuccess(){
@@ -132,6 +133,8 @@ const styles= StyleSheet.create({
     alignSelf:'center',
     color:'red',
   }
+  ,
+ 
 })
 
 
