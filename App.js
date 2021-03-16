@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RegistrationForm from './pages/HomeScreen';
-import {Ionicons,Entypo} from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 
 // function HomeScreen() {
 //   return (
@@ -25,6 +25,7 @@ function LocationsScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Locations!</Text>
+      <Feather name="activity" style={{fontSize:50}}/>
     </View>
   );
 }
