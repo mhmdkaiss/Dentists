@@ -109,6 +109,9 @@ class RegistrationForm extends Component {
             </CardSection>
 
             </Card>
+            <View style={{backgroundColor:'yellow',marginTop:50}}>
+              <Text style={styles.signIn}>Sign Up</Text>
+            </View>
           </View>
         
 
@@ -121,6 +124,7 @@ const styles= StyleSheet.create({
   containerForm:{
     flex:1,
     justifyContent:'center',
+    backgroundColor:'blue'
   }
   ,
   titleStyle:{
@@ -134,7 +138,10 @@ const styles= StyleSheet.create({
     color:'red',
   }
   ,
- 
+  signIn:{
+    alignSelf:'center',
+    backgroundColor:'red'
+  }
 })
 
 
