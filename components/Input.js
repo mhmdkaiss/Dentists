@@ -1,12 +1,15 @@
 import React,{Component} from 'react';
 import {TextInput, View, Text,StyleSheet} from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
 
-const Input = ({label,value,onChangeText,placeholder,secureTextEntry}) =>  {
+const Input = ({iconType,iconName,iconColor,value,onChangeText,placeholder,secureTextEntry}) =>  {
   state = {text:''};
-  const {containerstyle,labelstyle,inputstyle}=styles;
+  const {containerstyle,inputstyle,iconStyle}=styles;
+  
         return (
         <View style={containerstyle}>
-            <Text style={labelstyle}>{label}</Text>
+            {/* <Feather style={iconStyle} name={iconName} color={iconColor} size={20}/> */}
+            {iconType}
             <TextInput 
             style={inputstyle}
             value={value}
@@ -26,12 +29,11 @@ const styles= StyleSheet.create({
         height:40,
         alignItems:'center',
     },
-    labelstyle:{
+    iconStyle:{
         flex:1,
-        fontSize:18,
     },
     inputstyle:{
-        flex:2,
+        flex:8,
         fontSize:18
     }
 })

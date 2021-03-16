@@ -6,7 +6,7 @@ import RegistrationForm from './pages/HomeScreen';
 import Publicites from './pages/LocationsScreen';
 import secondTab from './pages/HeartPage';
 import Feather from 'react-native-vector-icons/Feather';
-import FontAwsome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 const Tab = createBottomTabNavigator();
@@ -24,7 +24,7 @@ export default function App() {
                     return <Feather name={iconName} size={size} color={color} />;
                   } else if (route.name === 'Settings') {
                     iconName = focused ? 'heartbeat' : 'heartbeat';
-                    return <FontAwsome name={iconName} size={size} color={color} />;
+                    return <FontAwesome name={iconName} size={size} color={color} />;
                   }else if (route.name === 'Locations') {
                     iconName = focused ? 'location-pin' : 'location-pin';
                     return <Entypo name={iconName} size={32} color={color} />;

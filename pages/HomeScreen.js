@@ -5,10 +5,12 @@ import CardSection from '../components/CardSection';
 import Button from '../components/Button';
 import Input from '../components/Input'
 import Spinner from '../components/Spinner';
-import Header from '../components/header';
+import Feather from 'react-native-vector-icons/Feather';
+
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class RegistrationForm extends Component {
-  state = {email:'test@test.com',password:'12345678',regId:'',error:'',loading:false};
+  state = {email:'',password:'',regId:'',error:'',loading:false,iconType:'Feather'};
 
   onButtonPress(){
     // const {email,password,regId} = this.state;
@@ -25,6 +27,15 @@ class RegistrationForm extends Component {
 //     });
 //   });
 
+  }
+  iconTypeFun(){
+    // switch('feather'){
+    //   case 'feather':
+    //     return <Text>feather!</Text>;
+    //   default:
+    //     return <Text>nothing</Text>
+    // }
+    return <Text>feather</Text>
   }
 
   renderButton(){
@@ -58,30 +69,35 @@ class RegistrationForm extends Component {
         <Card>
             <CardSection> 
                 <Input 
-                label={'Email'}
+                iconName={'search'}
+                iconColor={'red'}
                 value={this.state.email}
                 onChangeText={text=>this.setState({email:text})}
-                placeholder={'test@test.com'}
+                placeholder={'E-mail'}
               
                 />
             </CardSection>
 
             <CardSection>
             <Input 
-                label={'Password'}
+                iconName={'search'}
+                iconColor={'red'}
                 value={this.state.password}
                 onChangeText={password=>this.setState({password})}
                 placeholder={'password'}
                 secureTextEntry
+                iconType={this.iconTypeFun.bind(this)}
                 />
             </CardSection> 
 
             <CardSection>
             <Input 
-                label={'RegId'}
+                iconName={'search'}
+                iconColor={'red'}
                 value={this.state.regId}
                 onChangeText={regId=>this.setState({regId})}
-                placeholder={'RegId'}
+                placeholder={'Numero inscription'}
+                iconType={()=><Text>hey</Text>}
                 />
             </CardSection> 
 
