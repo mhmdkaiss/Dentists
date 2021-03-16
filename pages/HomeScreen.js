@@ -51,8 +51,10 @@ class RegistrationForm extends Component {
 
   render(){
       return (
-        <View>
-        <Header headerText={'Sign Up'}/>
+        
+        <View style={styles.containerForm}>
+
+        <Text style={styles.titleStyle}>Sign Up</Text>
         <Card>
             <CardSection> 
                 <Input 
@@ -89,11 +91,9 @@ class RegistrationForm extends Component {
             {this.renderButton()}
             </CardSection>
 
-           
-            
-        </Card>
-
-        </View>
+            </Card>
+          </View>
+        
 
         
     );
@@ -101,6 +101,16 @@ class RegistrationForm extends Component {
 }
 
 const styles= StyleSheet.create({
+  containerForm:{
+    flex:1,
+    justifyContent:'center',
+  }
+  ,
+  titleStyle:{
+    alignSelf:'center',
+    fontSize:22
+  }
+  ,
   errorTextStyle:{
     fontSize:20,
     alignSelf:'center',
