@@ -37,6 +37,7 @@ export default function App() {
               tabBarOptions={{
                 activeTintColor: 'black',
                 inactiveTintColor: 'gray',
+                showLabel:false,
               }} 
              >
         <Tab.Screen name="Home" component={RegistrationForm} />
