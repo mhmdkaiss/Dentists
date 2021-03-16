@@ -20,6 +20,10 @@ function SettingsScreen() {
       <Text>Settings!</Text>
       <Text>Settings!</Text>
       <Text>Settings!</Text>
+      <Text>Settings!</Text> <Text>Settings!</Text>
+      <Text>Settings!</Text>
+      <Text>Settings!</Text>
+      <Text>Settings!</Text>
     </View>
   );
 }
