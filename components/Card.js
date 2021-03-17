@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         borderWidth:1,
         padding:5,
         margin:10,
-        backgroundColor:'#fff',
+        backgroundColor:'#E6EBED',
         justifyContent:'flex-start',
         borderColor:'#ddd',
         position:'relative',

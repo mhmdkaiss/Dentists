@@ -8,7 +8,7 @@ const CardSection = ({buttonText,onButtonPress}) => {
        <TouchableOpacity style={{flex:1}} onPress={onButtonPress}>
         <LinearGradient colors={['#3b5998', '#8C28C8', '#3b5998']} style={styles.linearGradient} >
             <Text style={styles.buttonText}>
-            Sign up
+            Create Account
             </Text>
         </LinearGradient>
        </TouchableOpacity>

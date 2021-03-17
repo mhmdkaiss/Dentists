@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {TextInput, View, Text,StyleSheet} from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Input = ({iconType,iconName,iconColor,value,onChangeText,placeholder,secureTextEntry}) =>  {
   state = {text:''};
@@ -8,8 +8,8 @@ const Input = ({iconType,iconName,iconColor,value,onChangeText,placeholder,secur
   
         return (
         <View style={containerstyle}>
-            {/* <Feather style={iconStyle} name={iconName} color={iconColor} size={20}/> */}
-            {iconType}
+            <MaterialCommunityIcons style={iconStyle} name={iconName} color={iconColor} size={20}/>
+            
             <TextInput 
             style={inputstyle}
             value={value}
@@ -28,9 +28,11 @@ const styles= StyleSheet.create({
         flex:1,
         height:40,
         alignItems:'center',
+        borderRadius:100
     },
     iconStyle:{
         flex:1,
+        paddingLeft:10,
     },
     inputstyle:{
         flex:8,

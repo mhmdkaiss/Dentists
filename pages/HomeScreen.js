@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,Text, StyleSheet} from 'react-native';
+import {View,Text, StyleSheet,Image} from 'react-native';
 import Card from '../components/Card';
 import CardSection from '../components/CardSection';
 import Button from '../components/Button';
@@ -45,7 +45,6 @@ class RegistrationForm extends Component {
     
       return (
         <Button 
-            buttonText={'Sign Up'}
             onButtonPress={this.onButtonPress.bind(this)}
         />
         );
@@ -66,12 +65,13 @@ class RegistrationForm extends Component {
         
         <View style={styles.containerForm}>
 
+        <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
         <Text style={styles.titleStyle}>Sign Up</Text>
         <Card>
             <CardSection> 
                 <Input 
-                iconName={'search'}
-                iconColor={'red'}
+                iconName={'account-circle'}
+                iconColor={'purple'}
                 value={this.state.email}
                 onChangeText={text=>this.setState({email:text})}
                 placeholder={'E-mail'}
@@ -81,8 +81,8 @@ class RegistrationForm extends Component {
 
             <CardSection>
             <Input 
-                iconName={'search'}
-                iconColor={'red'}
+                iconName={'email-open'}
+                iconColor={'purple'}
                 value={this.state.password}
                 onChangeText={password=>this.setState({password})}
                 placeholder={'password'}
@@ -93,8 +93,8 @@ class RegistrationForm extends Component {
 
             <CardSection>
             <Input 
-                iconName={'search'}
-                iconColor={'red'}
+                iconName={'lock-plus'}
+                iconColor={'purple'}
                 value={this.state.regId}
                 onChangeText={regId=>this.setState({regId})}
                 placeholder={'Numero inscription'}
@@ -109,8 +109,8 @@ class RegistrationForm extends Component {
             </CardSection>
 
             </Card>
-            <View style={{backgroundColor:'yellow',marginTop:50}}>
-              <Text style={styles.signIn}>Sign Up</Text>
+            <View >
+              <Text style={styles.signIn}>Already have an account ? <Text style={{color:'blue'}}>Sign In</Text></Text>
             </View>
           </View>
         
@@ -124,12 +124,18 @@ const styles= StyleSheet.create({
   containerForm:{
     flex:1,
     justifyContent:'center',
-    backgroundColor:'blue'
+    backgroundColor:'white'
+  }
+  ,
+  imageStyle:{
+    alignSelf:'flex-end',
+    height:150,
+    width:100,
   }
   ,
   titleStyle:{
     alignSelf:'center',
-    fontSize:22
+    fontSize:22,
   }
   ,
   errorTextStyle:{
@@ -140,7 +146,6 @@ const styles= StyleSheet.create({
   ,
   signIn:{
     alignSelf:'center',
-    backgroundColor:'red'
   }
 })
 
