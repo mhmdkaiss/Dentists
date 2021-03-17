@@ -3,9 +3,10 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import RegistrationForm from './pages/HomeScreen';
+import RegistrationForm from './pages/SignUp';
 import Publicites from './pages/LocationsScreen';
 import secondTab from './pages/HeartPage';
+import SignIn from './pages/Signin';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -17,8 +18,9 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Homee" component={RegistrationForm} />
-      <HomeStack.Screen name="Details" component={secondTab} />
+      <HomeStack.Screen name="SignUp" component={RegistrationForm} 
+     options={{headerShown: false}}/>
+      <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />
     </HomeStack.Navigator>
   );
 }

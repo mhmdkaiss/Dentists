@@ -1,19 +1,21 @@
 import React,{Component} from 'react';
-import {View,Text, StyleSheet,Image} from 'react-native';
+import {View,Text, StyleSheet,Image, TouchableOpacity} from 'react-native';
 import Card from '../components/Card';
 import CardSection from '../components/CardSection';
 import Button from '../components/Button';
 import Input from '../components/Input'
 import Spinner from '../components/Spinner';
-import { useNavigation } from '@react-navigation/native';
 
-class RegistrationForm extends React.Component {  
+class SignIn extends React.Component {  
   state = {email:'',password:'',regId:'',error:'',loading:false,iconType:'Feather'};
   
+navigateScreen(){
+    this.props.navigation.navigate('SignUp');
+}
+
   onButtonPress(){
     // const {email,password,regId} = this.state;
-    this.setState({error:'pressed',loading:true});
-    this.props.navigation.navigate('Details');
+    this.setState({error:'pressed',loading:false});
 
 //     firebase.auth().signInWithEmailAndPassword(email,password)
 //   .then(this.onLoginSuccess.bind(this))
@@ -64,7 +66,7 @@ class RegistrationForm extends React.Component {
         <View style={styles.containerForm}>
 
         <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
-        <Text style={styles.titleStyle}>Sign Up</Text>
+        <Text style={styles.titleStyle}>Sign In</Text>
         <Card>
             <CardSection> 
                 <Input 
@@ -107,8 +109,11 @@ class RegistrationForm extends React.Component {
             </CardSection>
 
             </Card>
-            <View >
-              <Text style={styles.signIn}>Already have an account ? <Text style={{color:'blue'}}>Sign In</Text></Text>
+            <View style={styles.noAccountSignUp}>
+              <Text >Dont have an account ? </Text>
+                <TouchableOpacity onPress={this.navigateScreen.bind(this)} >
+                     <Text style={{color:'blue'}}>Sign Up</Text>
+                </TouchableOpacity>
             </View>
           </View>
         
@@ -142,11 +147,12 @@ const styles= StyleSheet.create({
     color:'red',
   }
   ,
-  signIn:{
+  noAccountSignUp:{
     alignSelf:'center',
+    flexDirection:'row',
   }
 })
 
 
-export default RegistrationForm;
+export default SignIn;
 
