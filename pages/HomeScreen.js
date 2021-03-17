@@ -5,18 +5,16 @@ import CardSection from '../components/CardSection';
 import Button from '../components/Button';
 import Input from '../components/Input'
 import Spinner from '../components/Spinner';
-import Feather from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
 
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-class RegistrationForm extends Component {
+class RegistrationForm extends React.Component {  
   state = {email:'',password:'',regId:'',error:'',loading:false,iconType:'Feather'};
-
+  
   onButtonPress(){
     // const {email,password,regId} = this.state;
-    this.setState({error:'',loading:true});
+    this.setState({error:'pressed',loading:true});
+    this.props.navigation.navigate('Details');
 
-  
 //     firebase.auth().signInWithEmailAndPassword(email,password)
 //   .then(this.onLoginSuccess.bind(this))
 //   .catch(()=>{

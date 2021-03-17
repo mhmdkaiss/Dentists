@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import RegistrationForm from './pages/HomeScreen';
 import Publicites from './pages/LocationsScreen';
 import secondTab from './pages/HeartPage';
@@ -10,6 +11,18 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 const Tab = createBottomTabNavigator();
+
+const HomeStack = createStackNavigator();
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Homee" component={RegistrationForm} />
+      <HomeStack.Screen name="Details" component={secondTab} />
+    </HomeStack.Navigator>
+  );
+}
+
 
 export default function App() {
   return (
@@ -40,7 +53,7 @@ export default function App() {
                 showLabel:false,
               }} 
              >
-        <Tab.Screen name="Home" component={RegistrationForm} />
+        <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Settings" component={secondTab} />
         <Tab.Screen name="Locations" component={Publicites} />
       </Tab.Navigator>
