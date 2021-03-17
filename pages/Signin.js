@@ -65,40 +65,32 @@ navigateScreen(){
         
         <View style={styles.containerForm}>
 
-        <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
+        <View style={styles.imageContainer}>
+            <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
+        </View>
+        
         <Text style={styles.titleStyle}>Sign In</Text>
         <Card>
             <CardSection> 
                 <Input 
                 iconName={'account-circle'}
                 iconColor={'purple'}
-                value={this.state.email}
-                onChangeText={text=>this.setState({email:text})}
-                placeholder={'E-mail'}
+                value={this.state.regId}
+                onChangeText={text=>this.setState({regId:text})}
+                placeholder={'Numero inscription'}
               
                 />
             </CardSection>
 
+            
             <CardSection>
             <Input 
-                iconName={'email-open'}
+                iconName={'lock-plus'}
                 iconColor={'purple'}
                 value={this.state.password}
                 onChangeText={password=>this.setState({password})}
                 placeholder={'password'}
                 secureTextEntry
-                iconType={this.iconTypeFun.bind(this)}
-                />
-            </CardSection> 
-
-            <CardSection>
-            <Input 
-                iconName={'lock-plus'}
-                iconColor={'purple'}
-                value={this.state.regId}
-                onChangeText={regId=>this.setState({regId})}
-                placeholder={'Numero inscription'}
-                iconType={()=><Text>hey</Text>}
                 />
             </CardSection> 
 
@@ -110,9 +102,9 @@ navigateScreen(){
 
             </Card>
             <View style={styles.noAccountSignUp}>
-              <Text >Dont have an account ? </Text>
+              <Text style={{fontSize:11}}>Dont have an account ? </Text>
                 <TouchableOpacity onPress={this.navigateScreen.bind(this)} >
-                     <Text style={{color:'blue'}}>Sign Up</Text>
+                     <Text style={{color:'blue',fontSize:12}}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
           </View>
@@ -126,7 +118,6 @@ navigateScreen(){
 const styles= StyleSheet.create({
   containerForm:{
     flex:1,
-    justifyContent:'center',
     backgroundColor:'white'
   }
   ,
@@ -144,7 +135,6 @@ const styles= StyleSheet.create({
   errorTextStyle:{
     fontSize:20,
     alignSelf:'center',
-    color:'red',
   }
   ,
   noAccountSignUp:{

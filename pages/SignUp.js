@@ -65,16 +65,19 @@ class RegistrationForm extends React.Component {
         
         <View style={styles.containerForm}>
 
-        <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
+        <View style={styles.imageContainer}>
+            <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
+        </View>
+
         <Text style={styles.titleStyle}>Sign Up</Text>
         <Card>
             <CardSection> 
                 <Input 
                 iconName={'account-circle'}
                 iconColor={'purple'}
-                value={this.state.email}
-                onChangeText={text=>this.setState({email:text})}
-                placeholder={'E-mail'}
+                value={this.state.regId}
+                onChangeText={text=>this.setState({regId:text})}
+                placeholder={'Numero inscription'}
               
                 />
             </CardSection>
@@ -83,11 +86,9 @@ class RegistrationForm extends React.Component {
             <Input 
                 iconName={'email-open'}
                 iconColor={'purple'}
-                value={this.state.password}
-                onChangeText={password=>this.setState({password})}
-                placeholder={'password'}
-                secureTextEntry
-                iconType={this.iconTypeFun.bind(this)}
+                value={this.state.email}
+                onChangeText={email=>this.setState({email})}
+                placeholder={'E-mail'}
                 />
             </CardSection> 
 
@@ -95,10 +96,10 @@ class RegistrationForm extends React.Component {
             <Input 
                 iconName={'lock-plus'}
                 iconColor={'purple'}
-                value={this.state.regId}
-                onChangeText={regId=>this.setState({regId})}
-                placeholder={'Numero inscription'}
-                iconType={()=><Text>hey</Text>}
+                value={this.state.password}
+                onChangeText={password=>this.setState({password})}
+                placeholder={'password'}
+                secureTextEntry
                 />
             </CardSection> 
 
@@ -110,9 +111,9 @@ class RegistrationForm extends React.Component {
 
             </Card>
             <View style={styles.alreadyhaveAccount}>
-              <Text >Already have an account ? </Text>
+              <Text style={{fontSize:11}}>Already have an account ? </Text>
               <TouchableOpacity onPress={this.navigateScreen.bind(this)}>
-                     <Text style={{color:'blue'}}>Sign In</Text>
+                     <Text style={{color:'blue',fontSize:12}}>Sign In</Text>
                 </TouchableOpacity>
               
             </View>
@@ -127,7 +128,6 @@ class RegistrationForm extends React.Component {
 const styles= StyleSheet.create({
   containerForm:{
     flex:1,
-    justifyContent:'center',
     backgroundColor:'white'
   }
   ,
