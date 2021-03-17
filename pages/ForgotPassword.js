@@ -6,11 +6,11 @@ import Button from '../components/Button';
 import Input from '../components/Input'
 import Spinner from '../components/Spinner';
 
-class SignIn extends React.Component {  
+class ForgotPassword extends React.Component {  
   state = {email:'',password:'',regId:'',error:'',loading:false,iconType:'Feather'};
   
-  navigatetoSignUp(){
-      this.props.navigation.navigate('SignUp');
+  navigatetoSignIn(){
+      this.props.navigation.navigate('SignIn');
   }
 
   navigatetoForgotPass(){
@@ -40,7 +40,7 @@ class SignIn extends React.Component {
     
       return (
         <Button 
-            Label={'LOG IN'}
+            Label={'SEND RESET LINK'}
             onButtonPress={this.onButtonPress.bind(this)}
         />
         );
@@ -65,39 +65,18 @@ class SignIn extends React.Component {
             <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
         </View>
         
-        <Text style={styles.titleStyle}>Sign In</Text>
+        <Text style={styles.titleStyle}>Forgot Password?</Text>
         <Card>
-            <CardSection> 
-                <Input 
-                iconName={'account-circle'}
-                iconColor={'purple'}
-                value={this.state.regId}
-                onChangeText={text=>this.setState({regId:text})}
-                placeholder={'Numero inscription'}
-              
-                />
-            </CardSection>
-
-            
-            <CardSection>
+        <CardSection>
             <Input 
-                iconName={'lock-plus'}
+                iconName={'email-open'}
                 iconColor={'purple'}
-                value={this.state.password}
-                onChangeText={password=>this.setState({password})}
-                placeholder={'password'}
-                secureTextEntry
+                value={this.state.email}
+                onChangeText={email=>this.setState({email})}
+                placeholder={'E-mail'}
                 />
             </CardSection> 
 
-            <View style={styles.forgotPasswordContainer}>
-              <View style={{flex:1}}>
-                <Text style={{fontSize:11}}>Remember me</Text>
-              </View>
-                <TouchableOpacity onPress={this.navigatetoForgotPass.bind(this)} >
-                     <Text style={{color:'blue',fontSize:12}}>Forgot Password?</Text>
-                </TouchableOpacity>
-            </View>
 
             <Text style={styles.errorTextStyle}>{this.state.error}</Text>
             
@@ -107,9 +86,9 @@ class SignIn extends React.Component {
 
             </Card>
             <View style={styles.noAccountSignUp}>
-              <Text style={{fontSize:11}}>Dont have an account ? </Text>
-                <TouchableOpacity onPress={this.navigatetoSignUp.bind(this)} >
-                     <Text style={{color:'blue',fontSize:12}}>Sign Up</Text>
+              <Text style={{fontSize:11}}>Back to </Text>
+                <TouchableOpacity onPress={this.navigatetoSignIn.bind(this)} >
+                     <Text style={{color:'blue',fontSize:12}}>Sign In</Text>
                 </TouchableOpacity>
             </View>
           </View>
@@ -137,11 +116,6 @@ const styles= StyleSheet.create({
     fontSize:22,
   }
   ,
-  forgotPasswordContainer:{
-    flexDirection:'row',
-    marginTop:10,
-  }
-  ,
   errorTextStyle:{
     fontSize:20,
     alignSelf:'center',
@@ -151,9 +125,10 @@ const styles= StyleSheet.create({
   noAccountSignUp:{
     alignSelf:'center',
     flexDirection:'row',
+    marginTop:20,
   }
 })
 
 
-export default SignIn;
+export default ForgotPassword;
 

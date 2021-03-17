@@ -45,6 +45,7 @@ class RegistrationForm extends React.Component {
     
       return (
         <Button 
+            Label = {'CREATE ACCOUNT'}
             onButtonPress={this.onButtonPress.bind(this)}
         />
         );

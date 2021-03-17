@@ -3,12 +3,12 @@ import {StyleSheet,Text,TouchableOpacity} from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 
-const CardSection = ({buttonText,onButtonPress}) => {
+const CardSection = ({Label,onButtonPress}) => {
     return(
        <TouchableOpacity style={{flex:1}} onPress={onButtonPress}>
         <LinearGradient colors={['#3b5998', '#8C28C8', '#3b5998']} style={styles.linearGradient} >
             <Text style={styles.buttonText}>
-            Create Account
+              {Label}
             </Text>
         </LinearGradient>
        </TouchableOpacity>
