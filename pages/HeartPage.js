@@ -5,6 +5,7 @@ import CardSection from '../components/CardSection';
 import Button from '../components/Button';
 import Input from '../components/Input'
 import Spinner from '../components/Spinner';
+import HButton from '../components/heartPage/HButton';
 
 class secondTab extends React.Component {  
  
@@ -19,7 +20,9 @@ class secondTab extends React.Component {
         </View>
         
         <View style={styles.PublicitesStyleContainer}>
-        <Text style={styles.titleStyle}>Publicites</Text>
+            <HButton label={'Actualites'}/>
+            <HButton label={'Documents Pratiques'}/>
+            <HButton label={'Reparation'}/>
         </View>
         
         
@@ -44,10 +47,6 @@ const styles= StyleSheet.create({
   }
   ,
   titleStyle:{
-    paddingRight:100,
-    paddingBottom:100,
-    fontSize:22,
-    color:'grey',
   }
   ,
   PublicitesStyleContainer:{
