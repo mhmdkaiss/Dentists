@@ -17,10 +17,14 @@ class typedattestation extends React.Component {
                 <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
             </View>
             
-            <View >
-                <HButton label={'Payer cotisation'}/>
-                <HButton label={'Demander une attestation'}/>
-            </View>
+            
+            <View style={{marginLeft:10,marginTop:10}}> 
+                <Text style={{color:'blue',fontSize:17}}>Veuillez Choisir le type dattestation</Text>
+                <View style={styles.pickerContainer}>
+                    <Text>helloo</Text>
+                </View>
+            </View>  
+        
         
         
         </View>
@@ -63,7 +67,15 @@ const styles= StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
   }
-
+  ,
+  pickerContainer:{
+    backgroundColor : "rgb(237,237,237)",
+    justifyContent  : "center",
+    width:160,
+    borderRadius:10,
+    height:30,
+    marginTop:10
+  }
 })
 
 
