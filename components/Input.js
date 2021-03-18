@@ -1,12 +1,15 @@
 import React,{Component} from 'react';
 import {TextInput, View, Text,StyleSheet} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Input = ({label,value,onChangeText,placeholder,secureTextEntry}) =>  {
+const Input = ({iconName,iconColor,value,onChangeText,placeholder,secureTextEntry}) =>  {
   state = {text:''};
-  const {containerstyle,labelstyle,inputstyle}=styles;
+  const {containerstyle,inputstyle,iconStyle}=styles;
+  
         return (
         <View style={containerstyle}>
-            <Text style={labelstyle}>{label}</Text>
+            <MaterialCommunityIcons style={iconStyle} name={iconName} color={iconColor} size={20}/>
+            
             <TextInput 
             style={inputstyle}
             value={value}
@@ -25,14 +28,15 @@ const styles= StyleSheet.create({
         flex:1,
         height:40,
         alignItems:'center',
+        borderRadius:100
     },
-    labelstyle:{
+    iconStyle:{
         flex:1,
-        fontSize:18,
+        paddingLeft:10,
     },
     inputstyle:{
-        flex:2,
-        fontSize:18
+        flex:8,
+        fontSize:14,
     }
 })
 

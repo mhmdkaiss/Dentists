@@ -2,46 +2,67 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import RegistrationForm from './pages/HomeScreen';
-import {Ionicons,Entypo} from 'react-native-vector-icons/Ionicons';
-
-// function HomeScreen() {
-//   return (
-//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//       <Text>Home!</Text>
-//     </View>
-//   );
-// }
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text> <Text>Settings!</Text>
-      <Text>Settings!</Text>
-      <Text>Settings!</Text>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-function LocationsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Locations!</Text>
-    </View>
-  );
-}
+import { createStackNavigator } from '@react-navigation/stack';
+import RegistrationForm from './pages/SignUp';
+import Publicites from './pages/LocationsScreen';
+import secondTab from './pages/HeartPage';
+import SignIn from './pages/Signin';
+import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Entypo from 'react-native-vector-icons/Entypo';
+import ForgotPassword from './pages/ForgotPassword';
+import DrCharfi from './pages/DrCharfi';
+import typedattestation from './pages/typedattestation';
 
 const Tab = createBottomTabNavigator();
+
+const HomeStack = createStackNavigator();
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="typedattestation" component={typedattestation} options={{headerShown: false}}/>
+      <HomeStack.Screen name="DrCharfi" component={DrCharfi} options={{headerShown: false}}/>
+      <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
+      <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />
+      <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
+    </HomeStack.Navigator>
+  );
+}
+
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator 
+      <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                  let iconName;
+
+                  if (route.name === 'Home') {
+                    iconName = focused ? 'search' : 'search';
+                    return <Feather name={iconName} size={size} color={color} />;
+                  } else if (route.name === 'Settings') {
+                    iconName = focused ? 'heartbeat' : 'heartbeat';
+                    return <FontAwesome name={iconName} size={size} color={color} />;
+                  }else if (route.name === 'Locations') {
+                    iconName = focused ? 'location-pin' : 'location-pin';
+                    return <Entypo name={iconName} size={32} color={color} />;
+                  }
+
+                  // You can return any component that you like here!
+              
+                },
+              })}
+              tabBarOptions={{
+                activeTintColor: 'black',
+                inactiveTintColor: 'gray',
+                showLabel:false,
+              }} 
              >
-        <Tab.Screen name="Home" component={RegistrationForm} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-        <Tab.Screen name="Locations" component={LocationsScreen} />
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Settings" component={secondTab} />
+        <Tab.Screen name="Locations" component={Publicites} />
       </Tab.Navigator>
     </NavigationContainer>
   );
