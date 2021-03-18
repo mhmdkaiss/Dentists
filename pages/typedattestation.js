@@ -1,11 +1,11 @@
 import React from 'react';
 import {Picker} from '@react-native-picker/picker';
-import {View,Text, StyleSheet,Image} from 'react-native';
-import HButton from '../components/heartPage/HButton';
+import {View,Text, StyleSheet,Image,TouchableOpacity} from 'react-native';
+import ToggleSwitch from 'toggle-switch-react-native'
 
 class typedattestation extends React.Component { 
   
-  state = {selectedLanguage:'java'};
+  state = {selectedLanguage:'java',envoyerPoste:false,envoyerMail:false};
   
   // pickerValueChanged(){
   //   const {selectedLanguage} = this.state;
@@ -42,7 +42,36 @@ class typedattestation extends React.Component {
                 </View>
             </View>  
         
-           
+           <View style={styles.togglesContainer}>
+              <View>
+                <ToggleSwitch
+                      isOn={this.state.envoyerPoste}
+                      onColor="green"
+                      offColor="grey"
+                      label="Envoyer l attestation via poste"
+                      labelStyle={{ color: "black", fontWeight: "300" }}
+                      size="medium"
+                      onToggle={isOn => this.setState({envoyerPoste:isOn})}
+                />
+               </View>
+               <View style={{marginTop:20}}>
+                  <ToggleSwitch
+                      isOn={this.state.envoyerMail}
+                      onColor="green"
+                      offColor="grey"
+                      label="Envoyer l attestation via poste"
+                      labelStyle={{ color: "black", fontWeight: "300" }}
+                      size="medium"
+                      onToggle={isOn => this.setState({envoyerMail:isOn})}
+                />
+               </View>
+           </View>
+
+           <TouchableOpacity style={styles.buttonContainer}>
+             
+             <Text style={styles.btnTextStyle}>Confirmer</Text>
+
+           </TouchableOpacity>
         
         
         </View>
@@ -93,6 +122,29 @@ const styles= StyleSheet.create({
     borderRadius:10,
     height:30,
     marginTop:10
+  }
+  ,
+  togglesContainer:{
+    alignItems:'center',
+    margin:30,
+    height:100,
+  }
+  ,
+  buttonContainer:{
+    backgroundColor:'#1F3792',
+    marginRight:40,
+    alignSelf:'flex-end',
+    width:100,
+    borderRadius:10,
+    height:35,
+  }
+  ,
+  btnTextStyle:{
+    color:'white',
+    fontSize:13,
+    padding:9,
+    alignSelf:'center',
+    fontWeight:'bold'
   }
 })
 
