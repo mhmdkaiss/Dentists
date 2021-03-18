@@ -12,6 +12,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import ForgotPassword from './pages/ForgotPassword';
 import DrCharfi from './pages/DrCharfi';
+import typedattestation from './pages/typedattestation';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,6 +21,7 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
+      <HomeStack.Screen name="typedattestation" component={typedattestation} options={{headerShown: false}}/>
       <HomeStack.Screen name="DrCharfi" component={DrCharfi} options={{headerShown: false}}/>
       <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
       <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />
