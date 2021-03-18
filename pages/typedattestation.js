@@ -1,9 +1,17 @@
 import React from 'react';
+import {Picker} from '@react-native-picker/picker';
 import {View,Text, StyleSheet,Image} from 'react-native';
 import HButton from '../components/heartPage/HButton';
 
-class typedattestation extends React.Component {  
- 
+class typedattestation extends React.Component { 
+  
+  state = {selectedLanguage:'java'};
+  
+  // pickerValueChanged(){
+  //   const {selectedLanguage} = this.state;
+  //   this.setState({selectedLanguage});
+  // };
+
   render(){
       return (
         
@@ -21,10 +29,21 @@ class typedattestation extends React.Component {
             <View style={{marginLeft:10,marginTop:10}}> 
                 <Text style={{color:'blue',fontSize:17}}>Veuillez Choisir le type dattestation</Text>
                 <View style={styles.pickerContainer}>
-                    <Text>helloo</Text>
+                   
                 </View>
             </View>  
         
+            <Picker
+                    
+                    selectedValue={this.state.selectedLanguage}
+                    onValueChange={(itemValue, itemIndex) => {
+                      this.setState({selectedLanguage:itemValue})
+                      console.log(this.state.selectedLanguage)
+                      }}
+             >
+                    <Picker.Item label="Java" value="java" />
+                    <Picker.Item label="JavaScript" value="js" />
+            </Picker>
         
         
         </View>
