@@ -29,21 +29,20 @@ class typedattestation extends React.Component {
             <View style={{marginLeft:10,marginTop:10}}> 
                 <Text style={{color:'blue',fontSize:17}}>Veuillez Choisir le type dattestation</Text>
                 <View style={styles.pickerContainer}>
-                   
+                  <Picker
+                      onValueChange={(itemValue, itemIndex) => {
+                        this.setState({selectedLanguage:itemValue})
+                        }}
+                        selectedValue={this.state.selectedLanguage}
+                        
+                    >
+                      <Picker.Item label="Java" value="java" />
+                      <Picker.Item label="JavaScript" value="javascript" />
+                  </Picker>
                 </View>
             </View>  
         
-            <Picker
-                    
-                    selectedValue={this.state.selectedLanguage}
-                    onValueChange={(itemValue, itemIndex) => {
-                      this.setState({selectedLanguage:itemValue})
-                      console.log(this.state.selectedLanguage)
-                      }}
-             >
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="JavaScript" value="js" />
-            </Picker>
+           
         
         
         </View>
