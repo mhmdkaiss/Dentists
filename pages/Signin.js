@@ -65,7 +65,7 @@ class SignIn extends React.Component {
             <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
         </View>
         
-        <Text style={styles.titleStyle}>Sign In</Text>
+        <Text style={styles.titleStyle}>Connexion</Text>
         <Card>
             <CardSection> 
                 <Input 
