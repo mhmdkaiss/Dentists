@@ -5,12 +5,20 @@ import ToggleSwitch from 'toggle-switch-react-native'
 
 class typedattestation extends React.Component { 
   
-  state = {selectedLanguage:'java',envoyerPoste:false,envoyerMail:false};
+  state = {selectedLanguage:'Ouverture',envoyerPoste:false,envoyerMail:false};
   
   // pickerValueChanged(){
   //   const {selectedLanguage} = this.state;
   //   this.setState({selectedLanguage});
   // };
+
+  sendData() {
+    const {selectedLanguage,envoyerMail,envoyerPoste} = this.state;
+
+    console.log(selectedLanguage);
+    console.log(envoyerMail);
+    console.log(envoyerPoste);
+  }
 
   render(){
       return (
@@ -33,11 +41,12 @@ class typedattestation extends React.Component {
                       onValueChange={(itemValue, itemIndex) => {
                         this.setState({selectedLanguage:itemValue})
                         }}
-                        selectedValue={this.state.selectedLanguage}
-                        
+                        selectedValue={this.state.selectedLanguage} 
                     >
-                      <Picker.Item label="Java" value="java" />
-                      <Picker.Item label="JavaScript" value="javascript" />
+                      <Picker.Item label="Ouverture" value="Ouverture" />
+                      <Picker.Item label="Inscription" value="Inscription" />
+                      <Picker.Item label="Exercise" value="Exercise" />
+                      <Picker.Item label="Bonne Conduire" value="Bonne Conduire" />
                   </Picker>
                 </View>
             </View>  
@@ -67,7 +76,7 @@ class typedattestation extends React.Component {
                </View>
            </View>
 
-           <TouchableOpacity style={styles.buttonContainer}>
+           <TouchableOpacity style={styles.buttonContainer} onPress={this.sendData.bind(this)} >
              
              <Text style={styles.btnTextStyle}>Confirmer</Text>
 
