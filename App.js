@@ -23,8 +23,8 @@ function HomeStackScreen() {
     <HomeStack.Navigator>
       <HomeStack.Screen name="typedattestation" component={typedattestation} options={{headerShown: false}}/>
       <HomeStack.Screen name="DrCharfi" component={DrCharfi} options={{headerShown: false}}/>
-      <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
       <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />
+      <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
       <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
     </HomeStack.Navigator>
   );
@@ -40,17 +40,17 @@ class App extends React.Component {
       const {loggedIn} = this.state;
 
         // auth().createUserWithEmailAndPassword('jane.doe@example.com', '12345678');
-        auth().signInWithEmailAndPassword('jane.doe@example.com','12345678')
+        auth().signInWithEmailAndPassword('testt@test.com','12345678')
 
-        auth().onAuthStateChanged((user)=>{
-        if(user){
-          // console.log(user);
-          console.log('user Logged in');
-        } else {
-          //  console.log(user);
-          console.log('user not logged');
-        }
-      })
+      //   auth().onAuthStateChanged((user)=>{
+      //   if(user){
+      //     // console.log(user);
+      //     // console.log(user);
+      //   } else {
+      //     //  console.log(user);
+      //     console.log('user not logged');
+      //   }
+      // })
     }
 
   render(){

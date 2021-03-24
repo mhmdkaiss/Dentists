@@ -1,26 +1,33 @@
 import React from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {View,Text, StyleSheet,Image,TouchableOpacity} from 'react-native';
-import ToggleSwitch from 'toggle-switch-react-native'
+import ToggleSwitch from 'toggle-switch-react-native';
+import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
 
 class typedattestation extends React.Component { 
   
-  state = {RegId:'',selectedLanguage:'Ouverture',envoyerPoste:false,envoyerMail:false};
+  state = {RegId:'',typeofAttestation:'Ouverture',envoyerPoste:false,envoyerMail:false,email:'',name:''};
   
-  // pickerValueChanged(){
-  //   const {selectedLanguage} = this.state;
-  //   this.setState({selectedLanguage});
-  // };
 
   sendData() {
-    const {RegId,selectedLanguage,envoyerMail,envoyerPoste} = this.state;
+    const {RegId,typeofAttestation,envoyerMail,envoyerPoste,email,name} = this.state;
 
-    console.log(RegId);
-    console.log(selectedLanguage);
-    console.log(envoyerMail);
-    console.log(envoyerPoste);
+    console.log(auth().currentUser);
+
+      database()
+    .ref(`/users/${auth().currentUser.uid}`)
+    .set({
+      id: auth().currentUser.uid,
+      type: typeofAttestation,
+      envoyerMail: envoyerMail,
+      envoyerPoste:envoyerPoste,
+      email:auth().currentUser.email,
+      name:auth().currentUser.displayName,
+    });
   }
 
+  
   render(){
       return (
         
@@ -40,9 +47,9 @@ class typedattestation extends React.Component {
                 <View style={styles.pickerContainer}>
                   <Picker
                       onValueChange={(itemValue, itemIndex) => {
-                        this.setState({selectedLanguage:itemValue})
+                        this.setState({typeofAttestation:itemValue})
                         }}
-                        selectedValue={this.state.selectedLanguage} 
+                        selectedValue={this.state.typeofAttestation} 
                     >
                       <Picker.Item label="Ouverture" value="Ouverture" />
                       <Picker.Item label="Inscription" value="Inscription" />
@@ -69,7 +76,7 @@ class typedattestation extends React.Component {
                       isOn={this.state.envoyerMail}
                       onColor="green"
                       offColor="grey"
-                      label="Envoyer l attestation via poste"
+                      label="Envoyer l attestation via Mail"
                       labelStyle={{ color: "black", fontWeight: "300" }}
                       size="medium"
                       onToggle={isOn => this.setState({envoyerMail:isOn})}
