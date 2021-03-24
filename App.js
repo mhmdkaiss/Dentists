@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,6 +12,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import ForgotPassword from './pages/ForgotPassword';
 import DrCharfi from './pages/DrCharfi';
 import typedattestation from './pages/typedattestation';
+import auth from '@react-native-firebase/auth';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,39 +31,65 @@ function HomeStackScreen() {
 }
 
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                  let iconName;
+class App extends React.Component {
 
-                  if (route.name === 'Home') {
-                    iconName = focused ? 'search' : 'search';
-                    return <Feather name={iconName} size={size} color={color} />;
-                  } else if (route.name === 'Settings') {
-                    iconName = focused ? 'heartbeat' : 'heartbeat';
-                    return <FontAwesome name={iconName} size={size} color={color} />;
-                  }else if (route.name === 'Locations') {
-                    iconName = focused ? 'location-pin' : 'location-pin';
-                    return <Entypo name={iconName} size={32} color={color} />;
-                  }
+  state = {loggedIn:null}
 
-                  // You can return any component that you like here!
-              
-                },
-              })}
-              tabBarOptions={{
-                activeTintColor: 'black',
-                inactiveTintColor: 'gray',
-                showLabel:false,
-              }} 
-             >
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Settings" component={secondTab} />
-        <Tab.Screen name="Locations" component={Publicites} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
+  componentWillMount(){
+        
+      const {loggedIn} = this.state;
+
+        // auth().createUserWithEmailAndPassword('jane.doe@example.com', '12345678');
+        auth().signInWithEmailAndPassword('jane.doe@example.com','12345678')
+
+        auth().onAuthStateChanged((user)=>{
+        if(user){
+          // console.log(user);
+          console.log('user Logged in');
+        } else {
+          //  console.log(user);
+          console.log('user not logged');
+        }
+      })
+    }
+
+  render(){
+    return (
+      <NavigationContainer>
+        <Tab.Navigator
+              screenOptions={({ route }) => ({
+                  tabBarIcon: ({ focused, color, size }) => {
+                    let iconName;
+  
+                    if (route.name === 'Home') {
+                      iconName = focused ? 'search' : 'search';
+                      return <Feather name={iconName} size={size} color={color} />;
+                    } else if (route.name === 'Settings') {
+                      iconName = focused ? 'heartbeat' : 'heartbeat';
+                      return <FontAwesome name={iconName} size={size} color={color} />;
+                    }else if (route.name === 'Locations') {
+                      iconName = focused ? 'location-pin' : 'location-pin';
+                      return <Entypo name={iconName} size={32} color={color} />;
+                    }
+  
+                    // You can return any component that you like here!
+                
+                  },
+                })}
+                tabBarOptions={{
+                  activeTintColor: 'black',
+                  inactiveTintColor: 'gray',
+                  showLabel:false,
+                }} 
+               >
+          <Tab.Screen name="Home" component={HomeStackScreen} />
+          <Tab.Screen name="Settings" component={secondTab} />
+          <Tab.Screen name="Locations" component={Publicites} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
+  
+
+export default App;

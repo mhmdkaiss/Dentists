@@ -5,7 +5,7 @@ import ToggleSwitch from 'toggle-switch-react-native'
 
 class typedattestation extends React.Component { 
   
-  state = {selectedLanguage:'Ouverture',envoyerPoste:false,envoyerMail:false};
+  state = {RegId:'',selectedLanguage:'Ouverture',envoyerPoste:false,envoyerMail:false};
   
   // pickerValueChanged(){
   //   const {selectedLanguage} = this.state;
@@ -13,8 +13,9 @@ class typedattestation extends React.Component {
   // };
 
   sendData() {
-    const {selectedLanguage,envoyerMail,envoyerPoste} = this.state;
+    const {RegId,selectedLanguage,envoyerMail,envoyerPoste} = this.state;
 
+    console.log(RegId);
     console.log(selectedLanguage);
     console.log(envoyerMail);
     console.log(envoyerPoste);
