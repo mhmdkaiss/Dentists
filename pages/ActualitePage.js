@@ -1,11 +1,11 @@
 import React from 'react';
-import {View,Text, StyleSheet,Image, FlatList, ScrollView} from 'react-native';
+import {View,Text, StyleSheet,Image, FlatList, Button} from 'react-native';
 import database from '@react-native-firebase/database';
 import Header from '../components/header';
 
-class Publicites extends React.Component { 
+class ActualitePage extends React.Component { 
 
-  state = {dataList:[],titleMsg:'',message:'',fakeid:''};
+  state = {dataList:[],titleMsg:'',message:'',fakeid:'test'};
   
   componentWillMount(){
     this.readfromDB();
@@ -13,9 +13,8 @@ class Publicites extends React.Component {
 
   readfromDB(){
     database()
-    .ref('/Publicities')
+    .ref('/Actualite')
     .on('value', snapshot => {
-       
             const notes = [];
             snapshot.forEach((child) => {
               notes.push({
@@ -25,10 +24,12 @@ class Publicites extends React.Component {
               });
             });
             this.setState({dataList: notes});
-
           });
-    
   } 
+
+//   deleteItem(fakeid){
+//     database().ref(`/Actualite/${fakeid}`).remove();
+// }
  
 
   render(){
@@ -36,7 +37,7 @@ class Publicites extends React.Component {
         
         <View style={styles.containerForm}>
 
-          <Header Label={'Publicite'}/>
+          <Header Label={'Actualité'}/>
 
           {/* <View style={styles.imageContainer}>
               <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
@@ -53,7 +54,7 @@ class Publicites extends React.Component {
 
                                 <Text style={styles.titleStyle}>{item.titleMsg}</Text>
                                 <Text style={styles.messageStyle}>{item.message}</Text>
-                                
+                                {/* <Button title={'delete'} onPress={()=>this.deleteItem(item.fakeid)}/> */}
                             </View>
                         ) 
                       // }
@@ -70,44 +71,44 @@ class Publicites extends React.Component {
 }
 
 const styles= StyleSheet.create({
-  containerForm:{
-    flex:1,
-    backgroundColor:'#EEF1F3'
-  }
-  ,
-  imageStyle:{
-    alignSelf:'flex-end',
-    height:150,
-    width:100,
-  }
-  ,
-  PublicitesStyleContainer:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center',
-  }
-  ,
-  messagesContainerStyle:{
-    backgroundColor:'white',
-    margin:10,
-    padding:15,
-    borderRadius:10,
-    width:330,
-  }
-  ,
-  titleStyle:{
-    paddingRight:10,
-    fontSize:21,
-    color:'black',
-    paddingBottom:10,
-  }
-  ,
-  messageStyle:{
-    color:'grey'
-  }
+    containerForm:{
+      flex:1,
+      backgroundColor:'#EEF1F3'
+    }
+    ,
+    imageStyle:{
+      alignSelf:'flex-end',
+      height:150,
+      width:100,
+    }
+    ,
+    PublicitesStyleContainer:{
+      flex:1,
+      justifyContent:'center',
+      alignItems:'center',
+    }
+    ,
+    messagesContainerStyle:{
+      backgroundColor:'white',
+      margin:10,
+      padding:15,
+      borderRadius:10,
+      width:330,
+    }
+    ,
+    titleStyle:{
+      paddingRight:10,
+      fontSize:21,
+      color:'black',
+      paddingBottom:10,
+    }
+    ,
+    messageStyle:{
+      color:'grey'
+    }
+  
+  })
 
-})
 
-
-export default Publicites;
+export default ActualitePage;
 

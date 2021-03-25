@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import RegistrationForm from './pages/SignUp';
 import Publicites from './pages/PublicitiesScreen';
-import secondTab from './pages/HeartPage';
+import HeartPage from './pages/HeartPage';
 import SignIn from './pages/Signin';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -13,6 +13,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import DrCharfi from './pages/DrCharfi';
 import typedattestation from './pages/typedattestation';
 import auth from '@react-native-firebase/auth';
+import ActualitePage from './pages/ActualitePage';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +27,15 @@ function HomeStackScreen() {
       <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />
       <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
       <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
+    </HomeStack.Navigator>
+  );
+}
+
+function HeartStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="HeartPage" component={HeartPage} options={{headerShown: false}}/>
+      <HomeStack.Screen name="ActualitePage" component={ActualitePage} options={{headerShown: false}}/>
     </HomeStack.Navigator>
   );
 }
@@ -83,7 +93,7 @@ class App extends React.Component {
                 }} 
                >
           <Tab.Screen name="Home" component={HomeStackScreen} />
-          <Tab.Screen name="Settings" component={secondTab} />
+          <Tab.Screen name="Settings" component={HeartStackScreen} />
           <Tab.Screen name="Locations" component={Publicites} />
         </Tab.Navigator>
       </NavigationContainer>
