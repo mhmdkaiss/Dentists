@@ -5,7 +5,7 @@ import Header from '../components/header';
 
 class Publicites extends React.Component { 
 
-  state = {dataList:[],titleMsg:'',message:''};
+  state = {dataList:[],titleMsg:'',message:'',fakeid:''};
   
   componentWillMount(){
     this.readfromDB();
@@ -26,7 +26,6 @@ class Publicites extends React.Component {
             });
             this.setState({dataList: notes});
 
-            console.log(notes);
           });
     
   } 
@@ -46,6 +45,7 @@ class Publicites extends React.Component {
           <View style={styles.PublicitesStyleContainer}>
               <FlatList
                     data={this.state.dataList}
+                    keyExtractor={(list)=>list.fakeid}
                     renderItem={({item,index})=>{
                         return(
                             <View style={styles.messagesContainerStyle}>
