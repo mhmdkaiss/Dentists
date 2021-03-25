@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 
-const Header = (props) => {
+const Header = ({Label}) => {
   return (
     <View style={styles.View}>
-      <Text style={styles.textStyle}>{props.headerText}</Text>
+      <Text style={styles.textStyle}>{Label}</Text>
     </View>
   );
 };

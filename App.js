@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import RegistrationForm from './pages/SignUp';
-import Publicites from './pages/LocationsScreen';
+import Publicites from './pages/PublicitiesScreen';
 import secondTab from './pages/HeartPage';
 import SignIn from './pages/Signin';
 import Feather from 'react-native-vector-icons/Feather';
