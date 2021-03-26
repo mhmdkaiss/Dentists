@@ -14,22 +14,26 @@ import {
   ActivityIndicator,
   FlatList,
   Linking,
-  TouchableOpacity
+  TouchableOpacity,
+  RefreshControl
 } from "react-native";
 
 import storage from "@react-native-firebase/storage";
 import Header from "../components/header";
+
+
 const DocumentsPage = () => {
   // State Defination
   const [listData, setListData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [refresh,setrefresh] =useState('');
+  const [refresh,setrefresh] =useState(false);
 
   useEffect(() => {
     listFilesAndDirectories("");
-  }, [refresh]);
+  }, []);
 
   const listFilesAndDirectories = (pageToken) => {
+    setrefresh(true);
     const reference = storage().ref("pdfs");
     reference.list({ pageToken }).then((result) => {
       result.items.forEach((ref) => {
@@ -44,6 +48,7 @@ const DocumentsPage = () => {
       }
       setListData(result.items);
       setLoading(false);
+      setrefresh(false);
     });
   };
 
@@ -104,6 +109,7 @@ const DocumentsPage = () => {
           //Item Separator View
           renderItem={ItemView}
           keyExtractor={(item, index) => index.toString()}
+          refreshControl={<RefreshControl refreshing={refresh} onRefresh={listFilesAndDirectories}/>}
         />
       )}
     
@@ -117,7 +123,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    padding: 10,
   },
   titleText: {
     fontSize: 20,
