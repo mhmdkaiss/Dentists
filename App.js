@@ -14,6 +14,7 @@ import DrCharfi from './pages/DrCharfi';
 import typedattestation from './pages/typedattestation';
 import auth from '@react-native-firebase/auth';
 import ActualitePage from './pages/ActualitePage';
+import DocumentsPage from './pages/DocumentsPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,6 +37,7 @@ function HeartStackScreen() {
     <HomeStack.Navigator>
       <HomeStack.Screen name="HeartPage" component={HeartPage} options={{headerShown: false}}/>
       <HomeStack.Screen name="ActualitePage" component={ActualitePage} options={{headerShown: false}}/>
+      <HomeStack.Screen name="DocumentsPage" component={DocumentsPage} options={{headerShown: false}}/>
     </HomeStack.Navigator>
   );
 }
