@@ -6,9 +6,17 @@ import Button from '../components/Button';
 import Input from '../components/Input'
 import Spinner from '../components/Spinner';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 class SignIn extends React.Component {  
-  state = {email:'mohamad_kaiss@hotmail.com',password:'12345678',regId:'',error:'',loading:false,iconType:'Feather'};
+  state = {
+    numeroarray:[],
+    email:'mohamad_kaiss@hotmail.com',
+    password:'12345678',
+    error:'',
+    loading:false,
+    Dentists:[],
+  };
   
   navigatetoSignUp(){
       this.props.navigation.navigate('SignUp');
@@ -27,28 +35,51 @@ class SignIn extends React.Component {
    .catch(()=>{
       this.setState({error:'Authentication failed!',loading:false})
     });
-  
-
   }
 
   renderButton(){
     if(this.state.loading){
       return <Spinner/>
     }
-    
-      return (
-        <Button 
-            Label={'Se connecter'}
-            onButtonPress={this.onButtonPress.bind(this)}
-        />
-        );
+    return (
+      <Button 
+          Label={'Se connecter'}
+          onButtonPress={this.onButtonPress.bind(this)}
+      />
+    );
   }
 
   onLoginSuccess(){
     this.props.navigation.navigate('typedattestation');
   }
 
+  componentWillMount(){
+    const usersCollection = firestore().collection('Users');
+    // Get user document with an ID of ABC
+    const userDocument = firestore()
+    .collection('Dentists').get().then( snapshot =>{
+      const dentistarray= [];
+      snapshot.forEach(doc=>{
+        const data = doc.data();
+        dentistarray.push(data);
+      })
+      this.setState({Dentists:dentistarray});
+     
+    }).catch(error => console.log(error));
+
+    console.log(this.state.Dentists);
+    
+  }
+
+
   render(){
+
+    
+    this.state.Dentists.map(dentist=>{
+      this.state.numeroarray.push(dentist.numero_inscription);
+    })
+    console.log(this.state.numeroarray);
+    
       return (
         
         <View style={styles.containerForm}>
