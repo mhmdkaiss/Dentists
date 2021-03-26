@@ -24,7 +24,7 @@ class HeartPage extends React.Component {
           <View style={styles.PublicitesStyleContainer}>
               <HButton label={'Actualités'} onButtonPress={this.navigatetoActualite.bind(this)}/>
               <HButton label={'Documents Pratiques'} onButtonPress={this.navigatetoDocuments.bind(this)}/>
-              <HButton label={'Reparation'}/>
+              <HButton label={'Repartition'}/>
           </View>
         
         

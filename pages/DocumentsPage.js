@@ -23,10 +23,11 @@ const DocumentsPage = () => {
   // State Defination
   const [listData, setListData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refresh,setrefresh] =useState('');
 
   useEffect(() => {
     listFilesAndDirectories("");
-  }, []);
+  }, [refresh]);
 
   const listFilesAndDirectories = (pageToken) => {
     const reference = storage().ref("pdfs");
