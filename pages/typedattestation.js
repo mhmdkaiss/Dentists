@@ -53,7 +53,7 @@ class typedattestation extends React.Component {
                     >
                       <Picker.Item label="Ouverture" value="Ouverture" />
                       <Picker.Item label="Inscription" value="Inscription" />
-                      <Picker.Item label="Exercise" value="Exercise" />
+                      <Picker.Item label="Exercice" value="Exercice" />
                       <Picker.Item label="Bonne Conduire" value="Bonne Conduire" />
                   </Picker>
                 </View>

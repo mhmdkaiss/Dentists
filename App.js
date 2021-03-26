@@ -43,63 +43,71 @@ function HeartStackScreen() {
 }
 
 
-class App extends React.Component {
+class App extends React.Component{
 
-  state = {loggedIn:null}
+  state={loggedIn:false};
 
   componentWillMount(){
-        
-      const {loggedIn} = this.state;
 
-        // auth().createUserWithEmailAndPassword('jane.doe@example.com', '12345678');
-        auth().signInWithEmailAndPassword('testt@test.com','12345678')
-
-      //   auth().onAuthStateChanged((user)=>{
-      //   if(user){
-      //     // console.log(user);
-      //     // console.log(user);
-      //   } else {
-      //     //  console.log(user);
-      //     console.log('user not logged');
-      //   }
-      // })
-    }
+    auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.setState({loggedIn:true});
+      } else {
+        this.setState({loggedIn:false});
+      }
+    })
+  }
 
   render(){
-    return (
-      <NavigationContainer>
-        <Tab.Navigator
-              screenOptions={({ route }) => ({
-                  tabBarIcon: ({ focused, color, size }) => {
-                    let iconName;
-  
-                    if (route.name === 'Home') {
-                      iconName = focused ? 'search' : 'search';
-                      return <Feather name={iconName} size={size} color={color} />;
-                    } else if (route.name === 'Settings') {
-                      iconName = focused ? 'heartbeat' : 'heartbeat';
-                      return <FontAwesome name={iconName} size={size} color={color} />;
-                    }else if (route.name === 'Locations') {
-                      iconName = focused ? 'location-pin' : 'location-pin';
-                      return <Entypo name={iconName} size={32} color={color} />;
-                    }
-  
-                    // You can return any component that you like here!
-                
-                  },
-                })}
-                tabBarOptions={{
-                  activeTintColor: 'black',
-                  inactiveTintColor: 'gray',
-                  showLabel:false,
-                }} 
-               >
-          <Tab.Screen name="Home" component={HomeStackScreen} />
-          <Tab.Screen name="Settings" component={HeartStackScreen} />
-          <Tab.Screen name="Locations" component={Publicites} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    );
+    const {loggedIn} = this.state;
+    if(loggedIn){
+      return (
+        <NavigationContainer>
+          <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused, color, size }) => {
+                      let iconName;
+    
+                      if (route.name === 'Home') {
+                        iconName = focused ? 'search' : 'search';
+                        return <Feather name={iconName} size={size} color={color} />;
+                      } else if (route.name === 'Settings') {
+                        iconName = focused ? 'heartbeat' : 'heartbeat';
+                        return <FontAwesome name={iconName} size={size} color={color} />;
+                      }else if (route.name === 'Locations') {
+                        iconName = focused ? 'shopping-cart' : 'shopping-cart';
+                        return <FontAwesome name={iconName} size={30} color={color} />;
+                      }
+    
+                      // You can return any component that you like here!
+                  
+                    },
+                  })}
+                  tabBarOptions={{
+                    activeTintColor: 'black',
+                    inactiveTintColor: 'gray',
+                    showLabel:false,
+                  }} 
+                 >
+            <Tab.Screen name="Home" component={HomeStackScreen} />
+            <Tab.Screen name="Settings" component={HeartStackScreen} />
+            <Tab.Screen name="Locations" component={Publicites} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      );
+    }
+    else {
+      return (
+        <NavigationContainer>
+          <HomeStack.Navigator>
+            <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />
+            <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
+            <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
+          </HomeStack.Navigator>
+        </NavigationContainer>
+      );
+    }
+    
   }
 }
   

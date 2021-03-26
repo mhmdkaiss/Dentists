@@ -8,7 +8,7 @@ import Spinner from '../components/Spinner';
 import auth from '@react-native-firebase/auth';
 
 class SignIn extends React.Component {  
-  state = {email:'',password:'',regId:'',error:'',loading:false,iconType:'Feather'};
+  state = {email:'mohamad_kaiss@hotmail.com',password:'12345678',regId:'',error:'',loading:false,iconType:'Feather'};
   
   navigatetoSignUp(){
       this.props.navigation.navigate('SignUp');
@@ -20,17 +20,14 @@ class SignIn extends React.Component {
 
   onButtonPress(){
     const {email,password,regId} = this.state;
-    this.setState({error:'pressed',loading:false});
+    this.setState({loading:false});
 
     auth().signInWithEmailAndPassword(email,password)
   .then(this.onLoginSuccess.bind(this))
-  .catch(()=>{
-    firebase.auth().createUserWithEmailAndPassword(email,password)
-    .then(this.onLoginSuccess.bind(this))
-    .catch(()=>{
+   .catch(()=>{
       this.setState({error:'Authentication failed!',loading:false})
     });
-  });
+  
 
   }
 
@@ -41,21 +38,15 @@ class SignIn extends React.Component {
     
       return (
         <Button 
-            Label={'LOG IN'}
+            Label={'Se connecter'}
             onButtonPress={this.onButtonPress.bind(this)}
         />
         );
   }
 
-//   onLoginSuccess(){
-//     this.setState({
-//       email:'',
-//       password:'',
-//       error:'',
-//       regId:'',
-//       loading:false,
-//     })
-//   }
+  onLoginSuccess(){
+    this.props.navigation.navigate('typedattestation');
+  }
 
   render(){
       return (
@@ -86,17 +77,17 @@ class SignIn extends React.Component {
                 iconColor={'purple'}
                 value={this.state.password}
                 onChangeText={password=>this.setState({password})}
-                placeholder={'password'}
+                placeholder={'Mot de passe'}
                 secureTextEntry
                 />
             </CardSection> 
 
             <View style={styles.forgotPasswordContainer}>
               <View style={{flex:1}}>
-                <Text style={{fontSize:11}}>Remember me</Text>
+                <Text style={{fontSize:11}}>Se souvenir de moi</Text>
               </View>
                 <TouchableOpacity onPress={this.navigatetoForgotPass.bind(this)} >
-                     <Text style={{color:'blue',fontSize:12}}>Forgot Password?</Text>
+                     <Text style={{color:'blue',fontSize:12}}>Mot de passe oublié?</Text>
                 </TouchableOpacity>
             </View>
 
@@ -108,9 +99,8 @@ class SignIn extends React.Component {
 
             </Card>
             <View style={styles.noAccountSignUp}>
-              <Text style={{fontSize:11}}>Dont have an account ? </Text>
                 <TouchableOpacity onPress={this.navigatetoSignUp.bind(this)} >
-                     <Text style={{color:'blue',fontSize:12}}>Sign Up</Text>
+                     <Text style={{color:'blue',fontSize:13}}>Créer un compte</Text>
                 </TouchableOpacity>
             </View>
           </View>
