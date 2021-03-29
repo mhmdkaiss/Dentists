@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,Text, StyleSheet,Image, TouchableOpacity} from 'react-native';
+import {View,Text, StyleSheet,Image,TouchableOpacity} from 'react-native';
 import Card from '../components/Card';
 import CardSection from '../components/CardSection';
 import Button from '../components/Button';
@@ -11,11 +11,10 @@ import firestore from '@react-native-firebase/firestore';
 class SignIn extends React.Component {  
   state = {
     numeroarray:[],
-    email:'mohamad_kaiss@hotmail.com',
     password:'12345678',
     error:'',
     loading:false,
-    Dentists:[],
+    Dentistsdata:[],
   };
   
   navigatetoSignUp(){
@@ -27,10 +26,14 @@ class SignIn extends React.Component {
   }
 
   onButtonPress(){
-    const {email,password,regId} = this.state;
+    const {numero,password} = this.state;
     this.setState({loading:false});
 
-    auth().signInWithEmailAndPassword(email,password)
+    const str1= numero;
+      const str2= '@france.com';
+      const numeroEmail= str1.concat(str2);
+
+    auth().signInWithEmailAndPassword(numeroEmail,password)
   .then(this.onLoginSuccess.bind(this))
    .catch(()=>{
       this.setState({error:'Authentication failed!',loading:false})
@@ -63,11 +66,9 @@ class SignIn extends React.Component {
         const data = doc.data();
         dentistarray.push(data);
       })
-      this.setState({Dentists:dentistarray});
+      this.setState({Dentistsdata:dentistarray});
      
     }).catch(error => console.log(error));
-
-    console.log(this.state.Dentists);
     
   }
 
@@ -75,10 +76,10 @@ class SignIn extends React.Component {
   render(){
 
     
-    this.state.Dentists.map(dentist=>{
+    this.state.Dentistsdata.map(dentist=>{
       this.state.numeroarray.push(dentist.numero_inscription);
     })
-    console.log(this.state.numeroarray);
+    // console.log(this.state.numeroarray);
     
       return (
         
@@ -94,10 +95,10 @@ class SignIn extends React.Component {
                 <Input 
                 iconName={'account-circle'}
                 iconColor={'purple'}
-                value={this.state.regId}
-                onChangeText={text=>this.setState({regId:text})}
+                value={this.state.numero}
+                onChangeText={text=>this.setState({numero:text})}
                 placeholder={'Numero inscription'}
-              
+                keyboardType={'numeric'}
                 />
             </CardSection>
 

@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {TextInput, View, Text,StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Input = ({iconName,iconColor,value,onChangeText,placeholder,secureTextEntry}) =>  {
+const Input = ({iconName,iconColor,value,onChangeText,placeholder,secureTextEntry,keyboardType}) =>  {
   state = {text:''};
   const {containerstyle,inputstyle,iconStyle}=styles;
   
@@ -17,6 +17,7 @@ const Input = ({iconName,iconColor,value,onChangeText,placeholder,secureTextEntr
             autoCorrect={false}
             placeholder={placeholder}
             secureTextEntry={secureTextEntry}
+            keyboardType={keyboardType}
             />
         </View>
     );

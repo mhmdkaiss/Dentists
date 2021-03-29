@@ -27,11 +27,6 @@ class ActualitePage extends React.Component {
           });
   } 
 
-//   deleteItem(fakeid){
-//     database().ref(`/Actualite/${fakeid}`).remove();
-// }
- 
-
   render(){
       return (
         
@@ -54,7 +49,6 @@ class ActualitePage extends React.Component {
 
                                 <Text style={styles.titleStyle}>{item.titleMsg}</Text>
                                 <Text style={styles.messageStyle}>{item.message}</Text>
-                                {/* <Button title={'delete'} onPress={()=>this.deleteItem(item.fakeid)}/> */}
                             </View>
                         ) 
                       // }

@@ -11,7 +11,7 @@ class typedattestation extends React.Component {
   
 
   sendData() {
-    const {RegId,typeofAttestation,envoyerMail,envoyerPoste,email,name} = this.state;
+    const {typeofAttestation,envoyerMail,envoyerPoste} = this.state;
 
     console.log(auth().currentUser);
 
@@ -25,6 +25,14 @@ class typedattestation extends React.Component {
       email:auth().currentUser.email,
       name:auth().currentUser.displayName,
     });
+
+    alert('Demande envoyer');
+
+
+
+    const doc = new jsPDF();
+    doc.text(10, 10, 'Hello world!');
+    doc.save('hello-world.pdf');
   }
 
   
