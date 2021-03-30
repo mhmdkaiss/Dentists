@@ -4,42 +4,70 @@ import {View,Text, StyleSheet,Image,TouchableOpacity} from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 class typedattestation extends React.Component { 
   
-  state = {RegId:'',typeofAttestation:'Ouverture',envoyerPoste:false,envoyerMail:false,email:'',name:''};
+  state = {typeofAttestation:'Ouverture',envoyerPoste:false,envoyerMail:false,currentEmail:''};
+
+  componentDidMount(){
+    firestore()
+    .collection('Dentists')
+    .get()
+    .then(querySnapshot => {
+      const Array=[];
+      querySnapshot.forEach(documentSnapshot => {
+        // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+        Array.push(documentSnapshot.data());
+      });
+     
+      // console.log(Array);
+
+      //get numero with @france.com
+        const numeroEmail = auth().currentUser.email;
+        const length=numeroEmail.length;
+        const numeroLength= length-11;
+        const numero = numeroEmail.slice(0, numeroLength);
+      
+
+      for(x in Array)
+      {
+        if(Array[x].numero_inscription==numero){
+          this.setState({currentEmail:Array[x].email});
+        }
+      }
+
+    }); 
+  }
   
-
   sendData() {
-    const {typeofAttestation,envoyerMail,envoyerPoste} = this.state;
-
-    console.log(auth().currentUser);
-
-      database()
+    const {typeofAttestation,envoyerMail,envoyerPoste,currentEmail} = this.state;
+    database()
     .ref(`/users/${auth().currentUser.uid}`)
     .set({
       id: auth().currentUser.uid,
       type: typeofAttestation,
       envoyerMail: envoyerMail,
       envoyerPoste:envoyerPoste,
-      email:auth().currentUser.email,
+      email:currentEmail,
       name:auth().currentUser.displayName,
     });
-
     alert('Demande envoyer');
-
-
-
-    const doc = new jsPDF();
-    doc.text(10, 10, 'Hello world!');
-    doc.save('hello-world.pdf');
   }
 
+  logout(){
+    auth().signOut();
+  }
   
   render(){
       return (
         
         <View style={styles.containerForm}>
+
+
+            <TouchableOpacity style={styles.logOutButton} onPress={this.logout.bind(this)}>
+              <Text style={{color:'white',fontSize:18}}>Déconnexion</Text>
+            </TouchableOpacity>
 
             <View style={styles.imageContainer}>
                 <View style={styles.titlesubContainerStyle}>
@@ -170,6 +198,11 @@ const styles= StyleSheet.create({
     padding:9,
     alignSelf:'center',
     fontWeight:'bold'
+  },
+  logOutButton:{
+    backgroundColor:'red',
+    alignItems:'center',
+    paddingRight:20,
   }
 })
 

@@ -37,7 +37,7 @@ const DocumentsPage = () => {
     const reference = storage().ref("pdfs");
     reference.list({ pageToken }).then((result) => {
       result.items.forEach((ref) => {
-        // console.log("ref  ->>  ", JSON.stringify(ref));
+        console.log(ref.fullPath);
       });
 
       if (result.nextPageToken) {
@@ -49,7 +49,9 @@ const DocumentsPage = () => {
       setListData(result.items);
       setLoading(false);
       setrefresh(false);
+      
     });
+    console.log(listData);
   };
 
   const ItemView = ({ item }) => {
