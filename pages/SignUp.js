@@ -64,7 +64,8 @@ class RegistrationForm extends React.Component {
   onLoginSuccess(){
      firestore()
     .collection('Dentists')
-    .add({
+    .doc(`${this.state.numero_insc}`)
+    .set({
       email: this.state.email,
       numero_inscription: this.state.numero_insc,
       paid:false,
