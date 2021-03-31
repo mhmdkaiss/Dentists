@@ -94,7 +94,7 @@ class RegistrationForm extends React.Component {
     else{return false};
   }
 
-  componentWillMount(){
+  componentDidMount(){
     // Get Dentists Data and put them in Dentistdata array
     firestore().collection('Dentists').get().then( snapshot =>{
       const dentistarray= [];

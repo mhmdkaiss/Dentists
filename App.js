@@ -99,8 +99,8 @@ class App extends React.Component{
       return (
         <NavigationContainer>
           <HomeStack.Navigator>
-           <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
-            <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />
+            <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />  
+            <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
             <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
           </HomeStack.Navigator>
         </NavigationContainer>
