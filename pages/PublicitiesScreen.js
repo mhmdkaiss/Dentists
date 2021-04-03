@@ -2,10 +2,25 @@ import React from 'react';
 import {View,Text, StyleSheet,Image, FlatList, ScrollView} from 'react-native';
 import database from '@react-native-firebase/database';
 import Header from '../components/header';
+import firestore from '@react-native-firebase/firestore';
 
 class Publicites extends React.Component { 
 
   state = {dataList:[],titleMsg:'',message:'',fakeid:''};
+
+  componentDidMount(){
+    firestore()
+    .collection('Publicities')
+    .get()
+    .then(querySnapshot => {
+      const array=[];
+      querySnapshot.forEach(documentSnapshot => {
+        array.push(documentSnapshot.data());
+      });
+      this.setState({dataList:array})
+        // console.log(this.state.dataList);
+    });
+  }
   
   componentWillMount(){
     this.readfromDB();
@@ -38,9 +53,7 @@ class Publicites extends React.Component {
 
           <Header Label={'Publicite'}/>
 
-          {/* <View style={styles.imageContainer}>
-              <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
-          </View> */}
+         
           
           <View style={styles.PublicitesStyleContainer}>
               <FlatList
@@ -51,7 +64,11 @@ class Publicites extends React.Component {
                         return(
                             <View style={styles.messagesContainerStyle}>
 
-                                <Text style={styles.titleStyle}>{item.titleMsg}</Text>
+                                {/* <View style={styles.imageContainer}>
+                                  <Image style={styles.imageStyle} source={{uri:`${item.fireUrl}`}}/>
+                                  </View> */}
+
+                                <Text style={styles.titleStyle}>{item.titlemessage}</Text>
                                 <Text style={styles.messageStyle}>{item.message}</Text>
                                 
                             </View>

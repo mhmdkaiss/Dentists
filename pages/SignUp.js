@@ -68,6 +68,7 @@ class RegistrationForm extends React.Component {
     .set({
       email: this.state.email,
       numero_inscription: this.state.numero_insc,
+      messages:[],
       paid:false,
     });
 
@@ -104,7 +105,7 @@ class RegistrationForm extends React.Component {
         dentistarray.push(data);
       })
       this.setState({Dentistsdata:dentistarray});
-      // console.log(this.state.Dentistsdata);  
+      console.log(this.state.Dentistsdata);  
     }).catch(error => console.log(error));  
 
 // get numeros for inscription
@@ -120,7 +121,7 @@ class RegistrationForm extends React.Component {
       this.state.numeroArraydata.map(item=>{
         this.state.numeroarray.push(item.numero_inscription);
       })
-      // console.log(this.state.numeroarray);
+    //  console.log(this.state.numeroarray);
     }).catch(error => console.log(error));  
   }
 
