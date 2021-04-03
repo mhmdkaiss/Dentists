@@ -21,29 +21,6 @@ class Publicites extends React.Component {
         // console.log(this.state.dataList);
     });
   }
-  
-  componentWillMount(){
-    this.readfromDB();
-  }
-
-  readfromDB(){
-    database()
-    .ref('/Publicities')
-    .on('value', snapshot => {
-       
-            const notes = [];
-            snapshot.forEach((child) => {
-              notes.push({
-                titleMsg: child.val().titleMsg,
-                message: child.val().message,
-                fakeid: child.key,
-              });
-            });
-            this.setState({dataList: notes});
-
-          });
-    
-  } 
  
 
   render(){
@@ -64,9 +41,9 @@ class Publicites extends React.Component {
                         return(
                             <View style={styles.messagesContainerStyle}>
 
-                                {/* <View style={styles.imageContainer}>
-                                  <Image style={styles.imageStyle} source={{uri:`${item.fireUrl}`}}/>
-                                  </View> */}
+                                <View style={styles.imageContainer}>
+                                  <Image style={styles.imageStyle} source={{uri:`${item.download}`}}/>
+                                </View>
 
                                 <Text style={styles.titleStyle}>{item.titlemessage}</Text>
                                 <Text style={styles.messageStyle}>{item.message}</Text>
@@ -94,8 +71,9 @@ const styles= StyleSheet.create({
   ,
   imageStyle:{
     alignSelf:'flex-end',
-    height:150,
-    width:100,
+    height:200,
+    width:'100%',
+    borderRadius:10
   }
   ,
   PublicitesStyleContainer:{
@@ -107,7 +85,7 @@ const styles= StyleSheet.create({
   messagesContainerStyle:{
     backgroundColor:'white',
     margin:10,
-    padding:15,
+    padding:5,
     borderRadius:10,
     width:330,
   }
