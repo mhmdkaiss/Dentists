@@ -69,7 +69,10 @@ class RegistrationForm extends React.Component {
       email: this.state.email,
       numero_inscription: this.state.numero_insc,
       messages:[],
-      paid:false,
+      year2018:false,
+      year2019:false,
+      year2020:false,
+      year2021:false,  
     });
 
     this.setState({
