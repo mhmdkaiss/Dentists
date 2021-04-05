@@ -1,13 +1,21 @@
 import React from 'react';
-import {View,Text, StyleSheet,Image, TouchableOpacity} from 'react-native';
+import {View,Text, StyleSheet,Image,TouchableOpacity} from 'react-native';
 import Card from '../components/Card';
 import CardSection from '../components/CardSection';
 import Button from '../components/Button';
 import Input from '../components/Input'
 import Spinner from '../components/Spinner';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 class SignIn extends React.Component {  
-  state = {email:'',password:'',regId:'',error:'',loading:false,iconType:'Feather'};
+  state = {
+    numeroarray:[],
+    password:'12345678',
+    error:'',
+    loading:false,
+    Dentistsdata:[],
+  };
   
   navigatetoSignUp(){
       this.props.navigation.navigate('SignUp');
@@ -18,45 +26,61 @@ class SignIn extends React.Component {
   }
 
   onButtonPress(){
-    // const {email,password,regId} = this.state;
-    this.setState({error:'pressed',loading:false});
+    const {numero,password} = this.state;
+    this.setState({loading:false});
 
-//     firebase.auth().signInWithEmailAndPassword(email,password)
-//   .then(this.onLoginSuccess.bind(this))
-//   .catch(()=>{
-//     firebase.auth().createUserWithEmailAndPassword(email,password)
-//     .then(this.onLoginSuccess.bind(this))
-//     .catch(()=>{
-//       this.setState({error:'Authentication failed!',loading:false})
-//     });
-//   });
+    const str1= numero;
+      const str2= '@france.com';
+      const numeroEmail= str1.concat(str2);
 
+    auth().signInWithEmailAndPassword(numeroEmail,password)
+  .then(this.onLoginSuccess.bind(this))
+   .catch(()=>{
+      this.setState({error:'Authentication failed!',loading:false})
+    });
   }
 
   renderButton(){
     if(this.state.loading){
       return <Spinner/>
     }
-    
-      return (
-        <Button 
-            Label={'LOG IN'}
-            onButtonPress={this.onButtonPress.bind(this)}
-        />
-        );
+    return (
+      <Button 
+          Label={'Se connecter'}
+          onButtonPress={this.onButtonPress.bind(this)}
+      />
+    );
   }
 
-//   onLoginSuccess(){
-//     this.setState({
-//       email:'',
-//       password:'',
-//       error:'',
-//       regId:'',
-//       loading:false,
-//     })
-//   }
+  onLoginSuccess(){
+    this.props.navigation.navigate('typedattestation');
+  }
+
+  componentWillMount(){
+    const usersCollection = firestore().collection('Users');
+    // Get user document with an ID of ABC
+    const userDocument = firestore()
+    .collection('Dentists').get().then( snapshot =>{
+      const dentistarray= [];
+      snapshot.forEach(doc=>{
+        const data = doc.data();
+        dentistarray.push(data);
+      })
+      this.setState({Dentistsdata:dentistarray});
+     
+    }).catch(error => console.log(error));
+    
+  }
+
 
   render(){
+
+    
+    this.state.Dentistsdata.map(dentist=>{
+      this.state.numeroarray.push(dentist.numero_inscription);
+    })
+    // console.log(this.state.numeroarray);
+    
       return (
         
         <View style={styles.containerForm}>
@@ -71,10 +95,10 @@ class SignIn extends React.Component {
                 <Input 
                 iconName={'account-circle'}
                 iconColor={'purple'}
-                value={this.state.regId}
-                onChangeText={text=>this.setState({regId:text})}
+                value={this.state.numero}
+                onChangeText={text=>this.setState({numero:text})}
                 placeholder={'Numero inscription'}
-              
+                keyboardType={'numeric'}
                 />
             </CardSection>
 
@@ -85,17 +109,17 @@ class SignIn extends React.Component {
                 iconColor={'purple'}
                 value={this.state.password}
                 onChangeText={password=>this.setState({password})}
-                placeholder={'password'}
+                placeholder={'Mot de passe'}
                 secureTextEntry
                 />
             </CardSection> 
 
             <View style={styles.forgotPasswordContainer}>
               <View style={{flex:1}}>
-                <Text style={{fontSize:11}}>Remember me</Text>
+                <Text style={{fontSize:11}}>Se souvenir de moi</Text>
               </View>
                 <TouchableOpacity onPress={this.navigatetoForgotPass.bind(this)} >
-                     <Text style={{color:'blue',fontSize:12}}>Forgot Password?</Text>
+                     <Text style={{color:'blue',fontSize:12}}>Mot de passe oublié?</Text>
                 </TouchableOpacity>
             </View>
 
@@ -107,9 +131,8 @@ class SignIn extends React.Component {
 
             </Card>
             <View style={styles.noAccountSignUp}>
-              <Text style={{fontSize:11}}>Dont have an account ? </Text>
                 <TouchableOpacity onPress={this.navigatetoSignUp.bind(this)} >
-                     <Text style={{color:'blue',fontSize:12}}>Sign Up</Text>
+                     <Text style={{color:'blue',fontSize:13}}>Créer un compte</Text>
                 </TouchableOpacity>
             </View>
           </View>

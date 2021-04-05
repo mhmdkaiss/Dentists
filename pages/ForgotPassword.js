@@ -5,9 +5,10 @@ import CardSection from '../components/CardSection';
 import Button from '../components/Button';
 import Input from '../components/Input'
 import Spinner from '../components/Spinner';
+import auth from '@react-native-firebase/auth';
 
 class ForgotPassword extends React.Component {  
-  state = {email:'',password:'',regId:'',error:'',loading:false,iconType:'Feather'};
+  state = {email:'',error:'',loading:false};
   
   navigatetoSignIn(){
       this.props.navigation.navigate('SignIn');
@@ -18,18 +19,14 @@ class ForgotPassword extends React.Component {
   }
 
   onButtonPress(){
-    // const {email,password,regId} = this.state;
-    this.setState({error:'pressed',loading:false});
+    const {email,password} = this.state;
+    this.setState({error:'Vérifiez maintenant votre boîte de réception',loading:false});
 
-//     firebase.auth().signInWithEmailAndPassword(email,password)
-//   .then(this.onLoginSuccess.bind(this))
-//   .catch(()=>{
-//     firebase.auth().createUserWithEmailAndPassword(email,password)
-//     .then(this.onLoginSuccess.bind(this))
-//     .catch(()=>{
-//       this.setState({error:'Authentication failed!',loading:false})
-//     });
-//   });
+    auth().sendPasswordResetEmail(email).then(function() {
+      // Email sent.
+    }).catch(function(error) {
+      // An error happened.
+    });
 
   }
 
@@ -40,7 +37,7 @@ class ForgotPassword extends React.Component {
     
       return (
         <Button 
-            Label={'SEND RESET LINK'}
+            Label={'Réinitialiser le mot de passe'}
             onButtonPress={this.onButtonPress.bind(this)}
         />
         );

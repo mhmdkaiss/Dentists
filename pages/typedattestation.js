@@ -1,21 +1,73 @@
 import React from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {View,Text, StyleSheet,Image,TouchableOpacity} from 'react-native';
-import ToggleSwitch from 'toggle-switch-react-native'
+import ToggleSwitch from 'toggle-switch-react-native';
+import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 class typedattestation extends React.Component { 
   
-  state = {selectedLanguage:'java',envoyerPoste:false,envoyerMail:false};
-  
-  // pickerValueChanged(){
-  //   const {selectedLanguage} = this.state;
-  //   this.setState({selectedLanguage});
-  // };
+  state = {typeofAttestation:'Ouverture',envoyerPoste:false,envoyerMail:false,currentEmail:''};
 
+  componentDidMount(){
+    firestore()
+    .collection('Dentists')
+    .get()
+    .then(querySnapshot => {
+      const Array=[];
+      querySnapshot.forEach(documentSnapshot => {
+        // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+        Array.push(documentSnapshot.data());
+      });
+     
+      // console.log(Array);
+
+      //get numero with @france.com
+        const numeroEmail = auth().currentUser.email;
+        const length=numeroEmail.length;
+        const numeroLength= length-11;
+        const numero = numeroEmail.slice(0, numeroLength);
+      
+
+      for(x in Array)
+      {
+        if(Array[x].numero_inscription==numero){
+          this.setState({currentEmail:Array[x].email});
+        }
+      }
+
+    }); 
+  }
+  
+  sendData() {
+    const {typeofAttestation,envoyerMail,envoyerPoste,currentEmail} = this.state;
+    database()
+    .ref(`/users/${auth().currentUser.uid}`)
+    .set({
+      id: auth().currentUser.uid,
+      type: typeofAttestation,
+      envoyerMail: envoyerMail,
+      envoyerPoste:envoyerPoste,
+      email:currentEmail,
+      name:auth().currentUser.displayName,
+    });
+    alert('Demande envoyer');
+  }
+
+  logout(){
+    auth().signOut();
+  }
+  
   render(){
       return (
         
         <View style={styles.containerForm}>
+
+
+            <TouchableOpacity style={styles.logOutButton} onPress={this.logout.bind(this)}>
+              <Text style={{color:'white',fontSize:18}}>Déconnexion</Text>
+            </TouchableOpacity>
 
             <View style={styles.imageContainer}>
                 <View style={styles.titlesubContainerStyle}>
@@ -31,13 +83,14 @@ class typedattestation extends React.Component {
                 <View style={styles.pickerContainer}>
                   <Picker
                       onValueChange={(itemValue, itemIndex) => {
-                        this.setState({selectedLanguage:itemValue})
+                        this.setState({typeofAttestation:itemValue})
                         }}
-                        selectedValue={this.state.selectedLanguage}
-                        
+                        selectedValue={this.state.typeofAttestation} 
                     >
-                      <Picker.Item label="Java" value="java" />
-                      <Picker.Item label="JavaScript" value="javascript" />
+                      <Picker.Item label="Ouverture" value="Ouverture" />
+                      <Picker.Item label="Inscription" value="Inscription" />
+                      <Picker.Item label="Exercice" value="Exercice" />
+                      <Picker.Item label="Bonne Conduire" value="Bonne Conduire" />
                   </Picker>
                 </View>
             </View>  
@@ -59,7 +112,7 @@ class typedattestation extends React.Component {
                       isOn={this.state.envoyerMail}
                       onColor="green"
                       offColor="grey"
-                      label="Envoyer l attestation via poste"
+                      label="Envoyer l attestation via Mail"
                       labelStyle={{ color: "black", fontWeight: "300" }}
                       size="medium"
                       onToggle={isOn => this.setState({envoyerMail:isOn})}
@@ -67,7 +120,7 @@ class typedattestation extends React.Component {
                </View>
            </View>
 
-           <TouchableOpacity style={styles.buttonContainer}>
+           <TouchableOpacity style={styles.buttonContainer} onPress={this.sendData.bind(this)} >
              
              <Text style={styles.btnTextStyle}>Confirmer</Text>
 
@@ -145,6 +198,11 @@ const styles= StyleSheet.create({
     padding:9,
     alignSelf:'center',
     fontWeight:'bold'
+  },
+  logOutButton:{
+    backgroundColor:'red',
+    alignItems:'center',
+    paddingRight:20,
   }
 })
 

@@ -2,7 +2,15 @@ import React from 'react';
 import {View,Text, StyleSheet,Image} from 'react-native';
 import HButton from '../components/heartPage/HButton';
 
-class secondTab extends React.Component {  
+class HeartPage extends React.Component {  
+
+  navigatetoActualite(){
+    this.props.navigation.navigate('ActualitePage');
+  }
+
+  navigatetoDocuments(){
+    this.props.navigation.navigate('DocumentsPage');
+  }
  
   render(){
       return (
@@ -14,9 +22,9 @@ class secondTab extends React.Component {
           </View>
           
           <View style={styles.PublicitesStyleContainer}>
-              <HButton label={'Actualites'}/>
-              <HButton label={'Documents Pratiques'}/>
-              <HButton label={'Reparation'}/>
+              <HButton label={'Actualités'} onButtonPress={this.navigatetoActualite.bind(this)}/>
+              <HButton label={'Documents Pratiques'} onButtonPress={this.navigatetoDocuments.bind(this)}/>
+              <HButton label={'Repartition'}/>
           </View>
         
         
@@ -50,5 +58,5 @@ const styles= StyleSheet.create({
 })
 
 
-export default secondTab;
+export default HeartPage;
 
