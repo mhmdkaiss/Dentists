@@ -11,6 +11,10 @@ class HeartPage extends React.Component {
   navigatetoDocuments(){
     this.props.navigation.navigate('DocumentsPage');
   }
+
+  navigatetoRepartition(){
+    this.props.navigation.navigate('RepartitionPage');
+  }
  
   render(){
       return (
@@ -24,7 +28,7 @@ class HeartPage extends React.Component {
           <View style={styles.PublicitesStyleContainer}>
               <HButton label={'Actualités'} onButtonPress={this.navigatetoActualite.bind(this)}/>
               <HButton label={'Documents Pratiques'} onButtonPress={this.navigatetoDocuments.bind(this)}/>
-              <HButton label={'Repartition'}/>
+              <HButton label={'Repartition'} onButtonPress={this.navigatetoRepartition.bind(this)}/>
           </View>
         
         
