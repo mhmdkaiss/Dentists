@@ -64,11 +64,6 @@ class typedattestation extends React.Component {
         
         <View style={styles.containerForm}>
 
-
-            <TouchableOpacity style={styles.logOutButton} onPress={this.logout.bind(this)}>
-              <Text style={{color:'white',fontSize:18}}>Déconnexion</Text>
-            </TouchableOpacity>
-
             <View style={styles.imageContainer}>
                 <View style={styles.titlesubContainerStyle}>
                     <Text style={styles.titleStyle}>Dr Mohamad Charfi</Text>
@@ -198,11 +193,6 @@ const styles= StyleSheet.create({
     padding:9,
     alignSelf:'center',
     fontWeight:'bold'
-  },
-  logOutButton:{
-    backgroundColor:'red',
-    alignItems:'center',
-    paddingRight:20,
   }
 })
 

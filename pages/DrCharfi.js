@@ -1,17 +1,31 @@
 import React from 'react';
-import {View,Text, StyleSheet,Image} from 'react-native';
+import {View,Text, StyleSheet,Image,TouchableOpacity} from 'react-native';
 import HButton from '../components/heartPage/HButton';
+import auth from '@react-native-firebase/auth';
 
 class DrCharfi extends React.Component {  
 
   navigatetoDemandAtt(){
     this.props.navigation.navigate('typedattestation');
   }
+
+  navigatetoNotifications(){
+    this.props.navigation.navigate('NotificationsPage');
+  }
+
+  logout(){
+    auth().signOut();
+  }
  
   render(){
       return (
         
         <View style={styles.containerForm}>
+
+        
+            <TouchableOpacity style={styles.logOutButton} onPress={this.logout.bind(this)}>
+              <Text style={{color:'white',fontSize:18}}>Déconnexion</Text>
+            </TouchableOpacity>
 
             <View style={styles.imageContainer}>
                 <View style={styles.titlesubContainerStyle}>
@@ -24,6 +38,7 @@ class DrCharfi extends React.Component {
             <View style={styles.PublicitesStyleContainer}>
                 <HButton label={'Payer cotisation'}/>
                 <HButton label={'Demander une attestation'} onButtonPress={this.navigatetoDemandAtt.bind(this)}/>
+                <HButton label={'Notifications'} onButtonPress={this.navigatetoNotifications.bind(this)}/>
             </View>
         
         
@@ -67,7 +82,12 @@ const styles= StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
   }
-
+  ,
+  logOutButton:{
+    backgroundColor:'red',
+    alignItems:'center',
+    paddingRight:20,
+  }
 })
 
 

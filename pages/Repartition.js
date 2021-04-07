@@ -141,7 +141,8 @@ const styles = StyleSheet.create({
     }
     ,
     TextStyle:{
-      margin:20
+      margin:20,
+      fontSize:17,
     }
 })
 

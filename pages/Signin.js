@@ -26,18 +26,25 @@ class SignIn extends React.Component {
   }
 
   onButtonPress(){
+    this.setState({loading:true})
     const {numero,password} = this.state;
-    this.setState({loading:false});
 
-    const str1= numero;
+    if(numero==null){
+      this.setState({error:'Authentication failed!',loading:false})
+    }
+    else{
+      const str1= numero;
       const str2= '@france.com';
       const numeroEmail= str1.concat(str2);
 
-    auth().signInWithEmailAndPassword(numeroEmail,password)
-  .then(this.onLoginSuccess.bind(this))
-   .catch(()=>{
+      
+        auth().signInWithEmailAndPassword(numeroEmail,password)
+      .then(this.onLoginSuccess.bind(this))
+      .catch(()=>{
       this.setState({error:'Authentication failed!',loading:false})
     });
+    }
+   
   }
 
   renderButton(){
@@ -45,15 +52,17 @@ class SignIn extends React.Component {
       return <Spinner/>
     }
     return (
+      <CardSection>
       <Button 
           Label={'Se connecter'}
           onButtonPress={this.onButtonPress.bind(this)}
       />
+      </CardSection>
     );
   }
 
   onLoginSuccess(){
-    this.props.navigation.navigate('typedattestation');
+    this.props.navigation.navigate('DrCharfi');
   }
 
   componentWillMount(){
@@ -125,9 +134,9 @@ class SignIn extends React.Component {
 
             <Text style={styles.errorTextStyle}>{this.state.error}</Text>
             
-            <CardSection>
-            {this.renderButton()}
-            </CardSection>
+            
+            <View>{this.renderButton()}</View>
+            
 
             </Card>
             <View style={styles.noAccountSignUp}>
@@ -175,6 +184,12 @@ const styles= StyleSheet.create({
     alignSelf:'center',
     flexDirection:'row',
   }
+  ,
+  spinnerStyle:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+}
 })
 
 

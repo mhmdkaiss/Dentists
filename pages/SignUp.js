@@ -92,7 +92,7 @@ class RegistrationForm extends React.Component {
 
   validateNumero(numero){
     const {numeroarray} = this.state;
-    console.log(numeroarray);
+    
     if(numeroarray.includes(numero)){
       return true;
     }

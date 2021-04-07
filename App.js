@@ -17,6 +17,7 @@ import ActualitePage from './pages/ActualitePage';
 import DocumentsPage from './pages/DocumentsPage';
 import repartition from './pages/Repartition';
 import ViewAttestation from './pages/ViewAttestation';
+import Notifications from './pages/Notifications';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,9 +28,8 @@ function HomeStackScreen() {
     <HomeStack.Navigator>
       <HomeStack.Screen name="DrCharfi" component={DrCharfi} options={{headerShown: false}}/>
       <HomeStack.Screen name="typedattestation" component={typedattestation} options={{headerShown: false}}/>
+      <HomeStack.Screen name="NotificationsPage" component={Notifications} options={{headerShown: false}}/>
       <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />
-      <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
-      <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
     </HomeStack.Navigator>
   );
 }
@@ -107,6 +107,7 @@ class App extends React.Component{
             <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />  
             <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
             <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
+            <HomeStack.Screen name="DrCharfi" component={DrCharfi} options={{headerShown: false}}/>
           </HomeStack.Navigator>
         </NavigationContainer>
       );
