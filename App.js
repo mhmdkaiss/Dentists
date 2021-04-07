@@ -16,6 +16,7 @@ import auth from '@react-native-firebase/auth';
 import ActualitePage from './pages/ActualitePage';
 import DocumentsPage from './pages/DocumentsPage';
 import repartition from './pages/Repartition';
+import ViewAttestation from './pages/ViewAttestation';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,8 +25,8 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="typedattestation" component={typedattestation} options={{headerShown: false}}/>
       <HomeStack.Screen name="DrCharfi" component={DrCharfi} options={{headerShown: false}}/>
+      <HomeStack.Screen name="typedattestation" component={typedattestation} options={{headerShown: false}}/>
       <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />
       <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
       <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
@@ -35,11 +36,13 @@ function HomeStackScreen() {
 
 function HeartStackScreen() {
   return (
-    <HomeStack.Navigator>repartition
+    <HomeStack.Navigator>
+
       <HomeStack.Screen name="HeartPage" component={HeartPage} options={{headerShown: false}}/>
       <HomeStack.Screen name="ActualitePage" component={ActualitePage} options={{headerShown: false}}/>
       <HomeStack.Screen name="DocumentsPage" component={DocumentsPage} options={{headerShown: false}}/>
       <HomeStack.Screen name="RepartitionPage" component={repartition} options={{headerShown: false}}/>
+      <HomeStack.Screen name="ViewAttestationPage" component={ViewAttestation} options={{headerShown: false}}/>
     </HomeStack.Navigator>
   );
 }

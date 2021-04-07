@@ -3,6 +3,10 @@ import {View,Text, StyleSheet,Image} from 'react-native';
 import HButton from '../components/heartPage/HButton';
 
 class DrCharfi extends React.Component {  
+
+  navigatetoDemandAtt(){
+    this.props.navigation.navigate('typedattestation');
+  }
  
   render(){
       return (
@@ -19,7 +23,7 @@ class DrCharfi extends React.Component {
             
             <View style={styles.PublicitesStyleContainer}>
                 <HButton label={'Payer cotisation'}/>
-                <HButton label={'Demander une attestation'}/>
+                <HButton label={'Demander une attestation'} onButtonPress={this.navigatetoDemandAtt.bind(this)}/>
             </View>
         
         
