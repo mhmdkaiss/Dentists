@@ -43,7 +43,7 @@ class Notifications extends React.Component {
         
         <View style={styles.containerForm}>
 
-          <Header Label={'Actualité'}/>
+          <Header Label={'Notifications'}/>
 
           {/* <View style={styles.imageContainer}>
               <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>

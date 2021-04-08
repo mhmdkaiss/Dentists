@@ -8,13 +8,18 @@ import Spinner from '../components/Spinner';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
+import CheckBox from '@react-native-community/checkbox';
+import AsyncStorage from '@react-native-community/async-storage'
+
 class SignIn extends React.Component {  
   state = {
+    numero:'',
     numeroarray:[],
     password:'12345678',
     error:'',
     loading:false,
     Dentistsdata:[],
+    toggleCheckBox:false,
   };
   
   navigatetoSignUp(){
@@ -125,6 +130,11 @@ class SignIn extends React.Component {
 
             <View style={styles.forgotPasswordContainer}>
               <View style={{flex:1}}>
+              <CheckBox
+              value={this.state.toggleCheckBox}
+              onValueChange={(newValue) => this.setState({toggleCheckBox:newValue}) }
+              // onChange={console.log(this.state.toggleCheckBox)}
+              />
                 <Text style={{fontSize:11}}>Se souvenir de moi</Text>
               </View>
                 <TouchableOpacity onPress={this.navigatetoForgotPass.bind(this)} >

@@ -96,6 +96,7 @@ const repartition = () => {
                 }}
                 selectedValue={DelegationSelected} 
             >
+              <Picker.Item label={`...`} />
               <Picker.Item label={`${DelegationNames[0]}`} value={`${DelegationNames[0]}`} />
               <Picker.Item label={`${DelegationNames[1]}`} value={`${DelegationNames[1]}`} />
               <Picker.Item label={`${DelegationNames[2]}`} value={`${DelegationNames[2]}`} />
