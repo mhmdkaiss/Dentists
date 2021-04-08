@@ -2,6 +2,7 @@ import React from 'react';
 import {View,Text, StyleSheet,Image,TouchableOpacity} from 'react-native';
 import HButton from '../components/heartPage/HButton';
 import auth from '@react-native-firebase/auth';
+var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 
 class DrCharfi extends React.Component {  
 
@@ -62,8 +63,8 @@ const styles= StyleSheet.create({
   ,
   imageStyle:{
     alignSelf:'flex-end',
-    height:150,
-    width:100,
+    height:22*vh,
+    width:25*vw,
   }
   ,
   titlesubContainerStyle:{
