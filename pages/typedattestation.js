@@ -55,9 +55,6 @@ class typedattestation extends React.Component {
     alert('Demande envoyer');
   }
 
-  logout(){
-    auth().signOut();
-  }
   
   render(){
       return (

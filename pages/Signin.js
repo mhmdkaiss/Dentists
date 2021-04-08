@@ -15,7 +15,7 @@ class SignIn extends React.Component {
   state = {
     numero:'',
     numeroarray:[],
-    password:'12345678',
+    password:'',
     error:'',
     loading:false,
     Dentistsdata:[],
@@ -66,11 +66,30 @@ class SignIn extends React.Component {
     );
   }
 
-  onLoginSuccess(){
+  async onLoginSuccess(){
+    const {numero,password,toggleCheckBox} = this.state;
+    if(toggleCheckBox==true){
+      await AsyncStorage.setItem('numero', numero)
+      await AsyncStorage.setItem('password', password)
+    }
+
+    else{
+      await AsyncStorage.removeItem('numero')
+      await AsyncStorage.removeItem('password')
+    }
+    
+
     this.props.navigation.navigate('DrCharfi');
   }
 
-  componentWillMount(){
+  async componentWillMount(){
+
+    const savednumero = await AsyncStorage.getItem('numero')
+    const savedpassword = await AsyncStorage.getItem('password')
+    if (savednumero !== null && savedpassword !==null) {
+      this.setState({numero:savednumero,password:savedpassword})
+    }
+    
     const usersCollection = firestore().collection('Users');
     // Get user document with an ID of ABC
     const userDocument = firestore()
@@ -129,13 +148,13 @@ class SignIn extends React.Component {
             </CardSection> 
 
             <View style={styles.forgotPasswordContainer}>
-              <View style={{flex:1}}>
+              <View style={{flex:1,flexDirection:'row'}}>
               <CheckBox
               value={this.state.toggleCheckBox}
               onValueChange={(newValue) => this.setState({toggleCheckBox:newValue}) }
               // onChange={console.log(this.state.toggleCheckBox)}
               />
-                <Text style={{fontSize:11}}>Se souvenir de moi</Text>
+                <Text style={{fontSize:11,paddingTop:8}}>Se souvenir de moi</Text>
               </View>
                 <TouchableOpacity onPress={this.navigatetoForgotPass.bind(this)} >
                      <Text style={{color:'blue',fontSize:12}}>Mot de passe oublié?</Text>

@@ -16,6 +16,7 @@ class DrCharfi extends React.Component {
 
   logout(){
     auth().signOut();
+    this.props.navigation.navigate('SignIn');
   }
  
   render(){
