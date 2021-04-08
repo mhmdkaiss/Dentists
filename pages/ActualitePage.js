@@ -1,7 +1,8 @@
 import React from 'react';
-import {View,Text, StyleSheet,Image, FlatList, Button} from 'react-native';
+import {View,Text, StyleSheet,Image, FlatList, Button, TouchableOpacity} from 'react-native';
 import database from '@react-native-firebase/database';
 import Header from '../components/header';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class ActualitePage extends React.Component { 
 
@@ -27,6 +28,14 @@ class ActualitePage extends React.Component {
           });
   } 
 
+  deleteMsg(index,id){
+    
+    console.log(id)
+    database()
+  .ref(`/Actualite/${id}`)
+  .set(null)
+  }
+
   render(){
       return (
         
@@ -47,8 +56,17 @@ class ActualitePage extends React.Component {
                         return(
                             <View style={styles.messagesContainerStyle}>
 
+                              <View style={{flex:1}}>
                                 <Text style={styles.titleStyle}>{item.titleMsg}</Text>
                                 <Text style={styles.messageStyle}>{item.message}</Text>
+                              </View>
+
+                              <View>
+                                <TouchableOpacity  onPress={()=>this.deleteMsg(index,item.fakeid)}>
+                                  <MaterialIcons name={'delete'} style={styles.iconStyle} size={22}/>
+                                </TouchableOpacity>
+                              </View>
+
                             </View>
                         ) 
                       // }
@@ -88,6 +106,8 @@ const styles= StyleSheet.create({
       padding:15,
       borderRadius:10,
       width:330,
+
+      flexDirection:'row'
     }
     ,
     titleStyle:{
@@ -99,7 +119,10 @@ const styles= StyleSheet.create({
     ,
     messageStyle:{
       color:'grey'
-    }
+    },
+    iconStyle:{
+        padding:15,
+    },
   
   })
 

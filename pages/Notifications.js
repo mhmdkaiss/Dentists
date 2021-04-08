@@ -3,6 +3,7 @@ import {View,Text, StyleSheet,Image, FlatList, Button, TouchableOpacity} from 'r
 import Header from '../components/header';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class Notifications extends React.Component { 
 
@@ -58,8 +59,8 @@ class Notifications extends React.Component {
                             <View style={styles.messagesContainerStyle}>
 
                                 <Text style={styles.titleStyle}>{item}</Text>
-                                <TouchableOpacity onPress={()=>this.deleteMsg(index,item)}>
-                                  <Text>delete {index}</Text>
+                                <TouchableOpacity onPress={()=>this.deleteMsg(index,item)}>                               
+                                  <MaterialIcons name={'delete'} style={styles.iconStyle} size={25}/>
                                 </TouchableOpacity>
                             </View>
                         ) 
@@ -114,6 +115,11 @@ const styles= StyleSheet.create({
     messageStyle:{
       color:'grey'
     }
+    ,
+    iconStyle:{
+      padding:4,
+  }
+  ,
   
   })
 
