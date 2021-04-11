@@ -1,8 +1,9 @@
 import React from 'react';
-import {View,Text, StyleSheet,Image, FlatList, Button, TouchableOpacity} from 'react-native';
+import {View,Text, StyleSheet,Image, FlatList, Linking, TouchableOpacity} from 'react-native';
 import database from '@react-native-firebase/database';
 import Header from '../components/header';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import storage from "@react-native-firebase/storage";
 
 class ActualitePage extends React.Component { 
 
@@ -22,18 +23,26 @@ class ActualitePage extends React.Component {
                 titleMsg: child.val().titleMsg,
                 message: child.val().message,
                 fakeid: child.key,
+                id: child.val().id,
               });
             });
             this.setState({dataList: notes});
-          });
+          }); 
   } 
 
-  deleteMsg(index,id){
-    
-    console.log(id)
-    database()
-  .ref(`/Actualite/${id}`)
-  .set(null)
+
+
+  download(id,pageToken){
+
+    storage().ref(`Actualites/${id}`).list({ pageToken }).then(async(result) => {
+            
+      const url = await storage()
+      .ref(result.items[0].path)
+      .getDownloadURL()
+      
+      Linking.openURL(url);
+    });
+
   }
 
   render(){
@@ -42,10 +51,6 @@ class ActualitePage extends React.Component {
         <View style={styles.containerForm}>
 
           <Header Label={'Actualité'}/>
-
-          {/* <View style={styles.imageContainer}>
-              <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
-          </View> */}
           
           <View style={styles.PublicitesStyleContainer}>
               <FlatList
@@ -62,10 +67,12 @@ class ActualitePage extends React.Component {
                               </View>
 
                               <View>
-                                <TouchableOpacity  onPress={()=>this.deleteMsg(index,item.fakeid)}>
-                                  <MaterialIcons name={'delete'} style={styles.iconStyle} size={22}/>
+                                <TouchableOpacity  onPress={()=>this.download(item.id)}>
+                                  <MaterialIcons name={'cloud-download'} style={styles.iconStyle} size={22}/>
                                 </TouchableOpacity>
                               </View>
+
+                              
 
                             </View>
                         ) 

@@ -47,8 +47,6 @@ const ViewAttestation = () => {
       });
 
 
-      console.log(currentUserEmail)
-
       if(currentUserEmail){
             setrefresh(true);
             storage().ref(`Attestations/${currentUserEmail}`).list({ pageToken }).then((result) => {
