@@ -23,7 +23,7 @@ class ActualitePage extends React.Component {
                 titleMsg: child.val().titleMsg,
                 message: child.val().message,
                 fakeid: child.key,
-                id: child.val().id,
+                downloadExist: child.val().downloadExist,
               });
             });
             this.setState({dataList: notes});
@@ -32,9 +32,9 @@ class ActualitePage extends React.Component {
 
 
 
-  download(id,pageToken){
+  download(fakeid,pageToken){
 
-    storage().ref(`Actualites/${id}`).list({ pageToken }).then(async(result) => {
+    storage().ref(`Actualites/${fakeid}`).list({ pageToken }).then(async(result) => {
             
       const url = await storage()
       .ref(result.items[0].path)
@@ -43,6 +43,14 @@ class ActualitePage extends React.Component {
       Linking.openURL(url);
     });
 
+  }
+
+  hidedownloadBtn(downloadExist){
+    if(downloadExist!=false){
+      return true
+    }else{
+      return false
+    }
   }
 
   render(){
@@ -57,7 +65,6 @@ class ActualitePage extends React.Component {
                     data={this.state.dataList}
                     keyExtractor={(list)=>list.fakeid}
                     renderItem={({item,index})=>{
-                      // if(item.titleMsg){
                         return(
                             <View style={styles.messagesContainerStyle}>
 
@@ -67,9 +74,11 @@ class ActualitePage extends React.Component {
                               </View>
 
                               <View>
-                                <TouchableOpacity  onPress={()=>this.download(item.id)}>
+                              {this.hidedownloadBtn(item.downloadExist)?
+                                <TouchableOpacity  onPress={()=>this.download(item.fakeid)}>
                                   <MaterialIcons name={'cloud-download'} style={styles.iconStyle} size={22}/>
-                                </TouchableOpacity>
+                                </TouchableOpacity> 
+                                : null }
                               </View>
 
                               
