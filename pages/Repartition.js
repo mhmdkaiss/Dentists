@@ -70,7 +70,7 @@ const repartition = () => {
   }
   
     return (
-        <View style={{}}>
+        <View style={{backgroundColor:'white',flex:1}}>
         <View style={styles.pickerContainer}>
           <Picker
               onValueChange={(itemValue, itemIndex) => {

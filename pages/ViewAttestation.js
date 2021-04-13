@@ -101,7 +101,7 @@ const ViewAttestation = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-     <Header Label={'Attestations'}/>
+    
       {loading ? (
         <View style={styles.container}>
           <ActivityIndicator size="large" color="#0000ff" />

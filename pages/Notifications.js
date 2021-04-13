@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,Text, StyleSheet,Image, FlatList, Button, TouchableOpacity} from 'react-native';
+import {View,Text, StyleSheet, FlatList, Alert, TouchableOpacity} from 'react-native';
 import Header from '../components/header';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -30,24 +30,36 @@ class Notifications extends React.Component {
   } 
 
   deleteMsg(index,message){
-    firestore()
-    .collection('Dentists')
-    .doc(this.state.numero_insc)
-    .update({
-      messages: firestore.FieldValue.arrayRemove(message),
-  });
+
+    Alert.alert(
+      'Supprimer cet élément',
+      '',
+      [
+        {
+          text:'SUPPRIMER',
+          onPress:()=>
+          {
+            firestore()
+            .collection('Dentists')
+            .doc(this.state.numero_insc)
+            .update({
+              messages: firestore.FieldValue.arrayRemove(message),
+          });
+          }
+        },
+        {
+          text:'ANNULER',
+        }
+      ]
+    )
+
+   
   }
 
   render(){
       return (
         
         <View style={styles.containerForm}>
-
-          <Header Label={'Notifications'}/>
-
-          {/* <View style={styles.imageContainer}>
-              <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
-          </View> */}
           
           <View style={styles.PublicitesStyleContainer}>
               <FlatList

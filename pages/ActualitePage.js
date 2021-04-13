@@ -57,8 +57,6 @@ class ActualitePage extends React.Component {
       return (
         
         <View style={styles.containerForm}>
-
-          <Header Label={'Actualité'}/>
           
           <View style={styles.PublicitesStyleContainer}>
               <FlatList

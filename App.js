@@ -8,7 +8,6 @@ import HeartPage from './pages/HeartPage';
 import SignIn from './pages/Signin';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Entypo from 'react-native-vector-icons/Entypo';
 import ForgotPassword from './pages/ForgotPassword';
 import DrCharfi from './pages/DrCharfi';
 import typedattestation from './pages/typedattestation';
@@ -18,17 +17,18 @@ import DocumentsPage from './pages/DocumentsPage';
 import repartition from './pages/Repartition';
 import ViewAttestation from './pages/ViewAttestation';
 import Notifications from './pages/Notifications';
+import {Button} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
 const HomeStack = createStackNavigator();
 
-function HomeStackScreen() {
+function HomeStackScreen(props) {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="DrCharfi" component={DrCharfi} options={{headerShown: false}}/>
-      <HomeStack.Screen name="typedattestation" component={typedattestation} options={{headerShown: false}}/>
-      <HomeStack.Screen name="NotificationsPage" component={Notifications} options={{headerShown: false}}/>
+      <HomeStack.Screen name="typedattestation" component={typedattestation}  options={{headerTitle: null}}/>
+      <HomeStack.Screen name="NotificationsPage" component={Notifications} options={{headerTitle: null}}/>
       <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />
     </HomeStack.Navigator>
   );
@@ -39,10 +39,10 @@ function HeartStackScreen() {
     <HomeStack.Navigator>
 
       <HomeStack.Screen name="HeartPage" component={HeartPage} options={{headerShown: false}}/>
-      <HomeStack.Screen name="ActualitePage" component={ActualitePage} options={{headerShown: false}}/>
-      <HomeStack.Screen name="DocumentsPage" component={DocumentsPage} options={{headerShown: false}}/>
-      <HomeStack.Screen name="RepartitionPage" component={repartition} options={{headerShown: false}}/>
-      <HomeStack.Screen name="ViewAttestationPage" component={ViewAttestation} options={{headerShown: false}}/>
+      <HomeStack.Screen name="ActualitePage" component={ActualitePage} options={{headerTitle: null}}/>
+      <HomeStack.Screen name="DocumentsPage" component={DocumentsPage} options={{headerTitle: null}}/>
+      <HomeStack.Screen name="RepartitionPage" component={repartition} options={{headerTitle: null}}/>
+      <HomeStack.Screen name="ViewAttestationPage" component={ViewAttestation} options={{headerTitle: null}}/>
     </HomeStack.Navigator>
   );
 }
