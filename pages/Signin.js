@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 class SignIn extends React.Component {  
   state = {
     numero:'',
-    numeroarray:[],
+    numeroarray:[], 
     password:'',
     error:'',
     loading:false,
