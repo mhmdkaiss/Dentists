@@ -1,6 +1,7 @@
 import React from 'react';
 import {View,Text, StyleSheet,Image} from 'react-native';
 import HButton from '../components/heartPage/HButton';
+var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 
 class HeartPage extends React.Component {  
 
@@ -10,6 +11,14 @@ class HeartPage extends React.Component {
 
   navigatetoDocuments(){
     this.props.navigation.navigate('DocumentsPage');
+  }
+
+  navigatetoRepartition(){
+    this.props.navigation.navigate('RepartitionPage');
+  }
+
+  navigatetoViewAtt(){
+    this.props.navigation.navigate('ViewAttestationPage');
   }
  
   render(){
@@ -24,7 +33,8 @@ class HeartPage extends React.Component {
           <View style={styles.PublicitesStyleContainer}>
               <HButton label={'Actualités'} onButtonPress={this.navigatetoActualite.bind(this)}/>
               <HButton label={'Documents Pratiques'} onButtonPress={this.navigatetoDocuments.bind(this)}/>
-              <HButton label={'Repartition'}/>
+              <HButton label={'Repartition'} onButtonPress={this.navigatetoRepartition.bind(this)}/>
+              <HButton label={'View Attestations'} onButtonPress={this.navigatetoViewAtt.bind(this)}/>
           </View>
         
         
@@ -42,8 +52,8 @@ const styles= StyleSheet.create({
   ,
   imageStyle:{
     alignSelf:'flex-end',
-    height:150,
-    width:100,
+    height:22*vh,
+    width:25*vw,
   }
   ,
   titleStyle:{

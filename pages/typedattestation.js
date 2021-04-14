@@ -1,6 +1,6 @@
 import React from 'react';
 import {Picker} from '@react-native-picker/picker';
-import {View,Text, StyleSheet,Image,TouchableOpacity} from 'react-native';
+import {View,Text, StyleSheet,Image,TouchableOpacity,Alert} from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
@@ -42,38 +42,47 @@ class typedattestation extends React.Component {
   
   sendData() {
     const {typeofAttestation,envoyerMail,envoyerPoste,currentEmail} = this.state;
-    database()
-    .ref(`/users/${auth().currentUser.uid}`)
-    .set({
-      id: auth().currentUser.uid,
-      type: typeofAttestation,
-      envoyerMail: envoyerMail,
-      envoyerPoste:envoyerPoste,
-      email:currentEmail,
-      name:auth().currentUser.displayName,
-    });
-    alert('Demande envoyer');
+
+    Alert.alert(
+      'Supprimer cet élément',
+      '',
+      [
+        {
+          text:'SUPPRIMER',
+          onPress:()=>
+          {
+            database()
+            .ref(`/users/${auth().currentUser.uid}`)
+            .set({
+              id: auth().currentUser.uid,
+              type: typeofAttestation,
+              envoyerMail: envoyerMail,
+              envoyerPoste:envoyerPoste,
+              email:currentEmail,
+              name:auth().currentUser.displayName,
+            });
+            alert('Demande envoyer');
+          }
+        },
+        {
+          text:'ANNULER',
+        }
+      ]
+    )
+   
   }
 
-  logout(){
-    auth().signOut();
-  }
   
   render(){
       return (
         
         <View style={styles.containerForm}>
 
-
-            <TouchableOpacity style={styles.logOutButton} onPress={this.logout.bind(this)}>
-              <Text style={{color:'white',fontSize:18}}>Déconnexion</Text>
-            </TouchableOpacity>
-
             <View style={styles.imageContainer}>
-                <View style={styles.titlesubContainerStyle}>
+                {/* <View style={styles.titlesubContainerStyle}>
                     <Text style={styles.titleStyle}>Dr Mohamad Charfi</Text>
                     <Text >Libre Pratique</Text>
-                </View>
+                </View> */}
                 <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
             </View>
             
@@ -142,7 +151,8 @@ const styles= StyleSheet.create({
   ,
   imageContainer:{
     flexDirection:'row',
-    alignItems:'center'
+    alignItems:'center',
+    alignSelf:'flex-end'
   }
   ,
   imageStyle:{
@@ -198,11 +208,6 @@ const styles= StyleSheet.create({
     padding:9,
     alignSelf:'center',
     fontWeight:'bold'
-  },
-  logOutButton:{
-    backgroundColor:'red',
-    alignItems:'center',
-    paddingRight:20,
   }
 })
 

@@ -41,11 +41,11 @@ class RegistrationForm extends React.Component {
         auth().createUserWithEmailAndPassword(numeroEmail,password)
           .then(this.onLoginSuccess.bind(this))
           .catch(()=>{
-            this.setState({error:'Authentication failed!',loading:false})
-          }); 
+            this.setState({error:'Authentification erronée!',loading:false})
+          });
       }
       else {
-        this.setState({error:'invalid email or numero'})
+        this.setState({error:'Entrée erronée'})
       }
   }
  
@@ -92,7 +92,7 @@ class RegistrationForm extends React.Component {
 
   validateNumero(numero){
     const {numeroarray} = this.state;
-    console.log(numeroarray);
+    
     if(numeroarray.includes(numero)){
       return true;
     }
@@ -167,7 +167,7 @@ class RegistrationForm extends React.Component {
                 iconColor={'purple'}
                 value={this.state.password}
                 onChangeText={password=>this.setState({password})}
-                placeholder={'password'}
+                placeholder={'mot de passe'}
                 secureTextEntry
                 />
             </CardSection> 

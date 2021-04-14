@@ -1,7 +1,9 @@
 import React from 'react';
-import {View,Text, StyleSheet,Image, FlatList, Button} from 'react-native';
+import {View,Text, StyleSheet,Image, FlatList, Linking, TouchableOpacity} from 'react-native';
 import database from '@react-native-firebase/database';
 import Header from '../components/header';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import storage from "@react-native-firebase/storage";
 
 class ActualitePage extends React.Component { 
 
@@ -21,34 +23,64 @@ class ActualitePage extends React.Component {
                 titleMsg: child.val().titleMsg,
                 message: child.val().message,
                 fakeid: child.key,
+                downloadExist: child.val().downloadExist,
               });
             });
             this.setState({dataList: notes});
-          });
+          }); 
   } 
+
+
+
+  download(fakeid,pageToken){
+
+    storage().ref(`Actualites/${fakeid}`).list({ pageToken }).then(async(result) => {
+            
+      const url = await storage()
+      .ref(result.items[0].path)
+      .getDownloadURL()
+      
+      Linking.openURL(url);
+    });
+
+  }
+
+  hidedownloadBtn(downloadExist){
+    if(downloadExist!=false){
+      return true
+    }else{
+      return false
+    }
+  }
 
   render(){
       return (
         
         <View style={styles.containerForm}>
-
-          <Header Label={'Actualité'}/>
-
-          {/* <View style={styles.imageContainer}>
-              <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
-          </View> */}
           
           <View style={styles.PublicitesStyleContainer}>
               <FlatList
                     data={this.state.dataList}
                     keyExtractor={(list)=>list.fakeid}
                     renderItem={({item,index})=>{
-                      // if(item.titleMsg){
                         return(
                             <View style={styles.messagesContainerStyle}>
 
+                              <View style={{flex:1}}>
                                 <Text style={styles.titleStyle}>{item.titleMsg}</Text>
                                 <Text style={styles.messageStyle}>{item.message}</Text>
+                              </View>
+
+                              <View>
+                              {this.hidedownloadBtn(item.downloadExist)?
+                                <TouchableOpacity  onPress={()=>this.download(item.fakeid)}>
+                                  <MaterialIcons name={'cloud-download'} style={styles.iconStyle} size={22}/>
+                                </TouchableOpacity> 
+                                : null }
+                              </View>
+
+                              
+
                             </View>
                         ) 
                       // }
@@ -88,6 +120,8 @@ const styles= StyleSheet.create({
       padding:15,
       borderRadius:10,
       width:330,
+
+      flexDirection:'row'
     }
     ,
     titleStyle:{
@@ -99,7 +133,10 @@ const styles= StyleSheet.create({
     ,
     messageStyle:{
       color:'grey'
-    }
+    },
+    iconStyle:{
+        padding:15,
+    },
   
   })
 

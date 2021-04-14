@@ -43,16 +43,6 @@ class ForgotPassword extends React.Component {
         );
   }
 
-//   onLoginSuccess(){
-//     this.setState({
-//       email:'',
-//       password:'',
-//       error:'',
-//       regId:'',
-//       loading:false,
-//     })
-//   }
-
   render(){
       return (
         
@@ -62,7 +52,7 @@ class ForgotPassword extends React.Component {
             <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
         </View>
         
-        <Text style={styles.titleStyle}>Forgot Password?</Text>
+        <Text style={styles.titleStyle}>Mot de passe oublié?</Text>
         <Card>
         <CardSection>
             <Input 
@@ -83,9 +73,9 @@ class ForgotPassword extends React.Component {
 
             </Card>
             <View style={styles.noAccountSignUp}>
-              <Text style={{fontSize:11}}>Back to </Text>
+              <Text style={{fontSize:14}}>Revenir à </Text>
                 <TouchableOpacity onPress={this.navigatetoSignIn.bind(this)} >
-                     <Text style={{color:'blue',fontSize:12}}>Sign In</Text>
+                     <Text style={{color:'blue',fontSize:15}}>Connexion</Text>
                 </TouchableOpacity>
             </View>
           </View>

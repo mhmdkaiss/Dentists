@@ -8,13 +8,18 @@ import Spinner from '../components/Spinner';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
+import CheckBox from '@react-native-community/checkbox';
+import AsyncStorage from '@react-native-community/async-storage'
+
 class SignIn extends React.Component {  
   state = {
+    numero:'',
     numeroarray:[],
-    password:'12345678',
+    password:'',
     error:'',
     loading:false,
     Dentistsdata:[],
+    toggleCheckBox:false,
   };
   
   navigatetoSignUp(){
@@ -26,18 +31,23 @@ class SignIn extends React.Component {
   }
 
   onButtonPress(){
+    this.setState({loading:true})
     const {numero,password} = this.state;
-    this.setState({loading:false});
 
-    const str1= numero;
-      const str2= '@france.com';
-      const numeroEmail= str1.concat(str2);
-
-    auth().signInWithEmailAndPassword(numeroEmail,password)
-  .then(this.onLoginSuccess.bind(this))
-   .catch(()=>{
-      this.setState({error:'Authentication failed!',loading:false})
-    });
+    if(numero=='' || password==''){
+      this.setState({error:'Authentification erronée!',loading:false})
+      }
+      else{ 
+        const str1= numero;
+        const str2= '@france.com';
+        const numeroEmail= str1.concat(str2);
+          auth().signInWithEmailAndPassword(numeroEmail,password)
+          .then(this.onLoginSuccess.bind(this))
+          .catch(()=>{
+          this.setState({error:'Authentication failed!',loading:false})
+        });
+      }
+   
   }
 
   renderButton(){
@@ -45,18 +55,39 @@ class SignIn extends React.Component {
       return <Spinner/>
     }
     return (
+      <CardSection>
       <Button 
           Label={'Se connecter'}
           onButtonPress={this.onButtonPress.bind(this)}
       />
+      </CardSection>
     );
   }
 
-  onLoginSuccess(){
-    this.props.navigation.navigate('typedattestation');
+  async onLoginSuccess(){
+    const {numero,password,toggleCheckBox} = this.state;
+    if(toggleCheckBox==true){
+      await AsyncStorage.setItem('numero', numero)
+      await AsyncStorage.setItem('password', password)
+    }
+
+    else{
+      await AsyncStorage.removeItem('numero')
+      await AsyncStorage.removeItem('password')
+    }
+    
+
+    this.props.navigation.navigate('DrCharfi');
   }
 
-  componentWillMount(){
+  async componentWillMount(){
+
+    const savednumero = await AsyncStorage.getItem('numero')
+    const savedpassword = await AsyncStorage.getItem('password')
+    if (savednumero !== null && savedpassword !==null) {
+      this.setState({numero:savednumero,password:savedpassword})
+    }
+    
     const usersCollection = firestore().collection('Users');
     // Get user document with an ID of ABC
     const userDocument = firestore()
@@ -115,8 +146,13 @@ class SignIn extends React.Component {
             </CardSection> 
 
             <View style={styles.forgotPasswordContainer}>
-              <View style={{flex:1}}>
-                <Text style={{fontSize:11}}>Se souvenir de moi</Text>
+              <View style={{flex:1,flexDirection:'row'}}>
+              <CheckBox
+              value={this.state.toggleCheckBox}
+              onValueChange={(newValue) => this.setState({toggleCheckBox:newValue}) }
+              // onChange={console.log(this.state.toggleCheckBox)}
+              />
+                <Text style={{fontSize:11,paddingTop:8}}>Se souvenir de moi</Text>
               </View>
                 <TouchableOpacity onPress={this.navigatetoForgotPass.bind(this)} >
                      <Text style={{color:'blue',fontSize:12}}>Mot de passe oublié?</Text>
@@ -125,9 +161,9 @@ class SignIn extends React.Component {
 
             <Text style={styles.errorTextStyle}>{this.state.error}</Text>
             
-            <CardSection>
-            {this.renderButton()}
-            </CardSection>
+            
+            <View>{this.renderButton()}</View>
+            
 
             </Card>
             <View style={styles.noAccountSignUp}>
@@ -175,6 +211,12 @@ const styles= StyleSheet.create({
     alignSelf:'center',
     flexDirection:'row',
   }
+  ,
+  spinnerStyle:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+}
 })
 
 
