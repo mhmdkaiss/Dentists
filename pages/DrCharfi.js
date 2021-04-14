@@ -30,10 +30,6 @@ class DrCharfi extends React.Component {
             </TouchableOpacity>
 
             <View style={styles.imageContainer}>
-                {/* <View style={styles.titlesubContainerStyle}>
-                    <Text style={styles.titleStyle}>Dr Mohamad Charfi</Text>
-                    <Text >Libre Pratique</Text>
-                </View> */}
                 <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
             </View>
             

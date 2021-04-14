@@ -79,10 +79,10 @@ class typedattestation extends React.Component {
         <View style={styles.containerForm}>
 
             <View style={styles.imageContainer}>
-                <View style={styles.titlesubContainerStyle}>
+                {/* <View style={styles.titlesubContainerStyle}>
                     <Text style={styles.titleStyle}>Dr Mohamad Charfi</Text>
                     <Text >Libre Pratique</Text>
-                </View>
+                </View> */}
                 <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
             </View>
             
@@ -151,7 +151,8 @@ const styles= StyleSheet.create({
   ,
   imageContainer:{
     flexDirection:'row',
-    alignItems:'center'
+    alignItems:'center',
+    alignSelf:'flex-end'
   }
   ,
   imageStyle:{

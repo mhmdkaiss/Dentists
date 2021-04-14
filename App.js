@@ -17,7 +17,6 @@ import DocumentsPage from './pages/DocumentsPage';
 import repartition from './pages/Repartition';
 import ViewAttestation from './pages/ViewAttestation';
 import Notifications from './pages/Notifications';
-import {Button} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,6 +44,17 @@ function HeartStackScreen() {
       <HomeStack.Screen name="ViewAttestationPage" component={ViewAttestation} options={{headerTitle: null}}/>
     </HomeStack.Navigator>
   );
+}
+
+function WhenNotSignedIn(){
+  return(
+    <HomeStack.Navigator>
+    <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />  
+    <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
+    <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
+    <HomeStack.Screen name="DrCharfi" component={DrCharfi} options={{headerShown: false}}/>
+  </HomeStack.Navigator>
+  )
 }
 
 
@@ -103,12 +113,37 @@ class App extends React.Component{
     else {
       return (
         <NavigationContainer>
-          <HomeStack.Navigator>
-            <HomeStack.Screen name="SignIn" component={SignIn} options={{headerShown: false}} />  
-            <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
-            <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
-            <HomeStack.Screen name="DrCharfi" component={DrCharfi} options={{headerShown: false}}/>
-          </HomeStack.Navigator>
+        <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused, color, size }) => {
+                      let iconName;
+    
+                      if (route.name === 'Home') {
+                        iconName = focused ? 'search' : 'search';
+                        return <Feather name={iconName} size={size} color={color} />;
+                      } else if (route.name === 'Settings') {
+                        iconName = focused ? 'heartbeat' : 'heartbeat';
+                        return <FontAwesome name={iconName} size={size} color={color} />;
+                      }else if (route.name === 'Locations') {
+                        iconName = focused ? 'shopping-cart' : 'shopping-cart';
+                        return <FontAwesome name={iconName} size={30} color={color} />;
+                      }
+    
+                      // You can return any component that you like here!
+                  
+                    },
+                  })}
+                  tabBarOptions={{
+                    activeTintColor: 'black',
+                    inactiveTintColor: 'gray',
+                    showLabel:false,
+                  }} 
+                 >
+            <Tab.Screen name="Home" component={WhenNotSignedIn} />
+            <Tab.Screen name="Settings" component={repartition} />
+            <Tab.Screen name="Locations" component={Publicites} />
+          </Tab.Navigator>
+         
         </NavigationContainer>
       );
     }

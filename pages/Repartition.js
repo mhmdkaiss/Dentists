@@ -1,7 +1,9 @@
 import React , {useState,useEffect} from 'react';
-import {View,Text, StyleSheet,Image,TouchableOpacity,FlatList, ActivityIndicator} from 'react-native';
+import {View,Text, StyleSheet,Image} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {Picker} from '@react-native-picker/picker';
+var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
+import auth from '@react-native-firebase/auth';
 
 const repartition = () => {
 
@@ -15,21 +17,21 @@ const repartition = () => {
     const [change, setchange] = useState(0);
 
     useEffect(() => { 
-      
+   
       firestore()
-  .collection('Gouvernorat')
-  .get()
-  .then(querySnapshot => {
-    var array=[];
-    querySnapshot.forEach(documentSnapshot => {
-      array.push(documentSnapshot.id)
-    });
-    setGouvernoratdata(array);
-  }).then(  firestore()
-  .collection('Gouvernorat')
-  .doc(`${GouvernoratSelected}`)
-  .get()
-  .then(documentSnapshot => {
+      .collection('Gouvernorat')
+      .get()
+      .then(querySnapshot => {
+        var array=[];
+        querySnapshot.forEach(documentSnapshot => {
+          array.push(documentSnapshot.id)
+        });
+        setGouvernoratdata(array);
+      }).then(  firestore()
+      .collection('Gouvernorat')
+      .doc(`${GouvernoratSelected}`)
+      .get()
+      .then(documentSnapshot => {
       
     
     if (documentSnapshot.exists) {
@@ -71,6 +73,23 @@ const repartition = () => {
   
     return (
         <View style={{backgroundColor:'white',flex:1}}>
+
+        
+         
+         {
+           !auth().currentUser? <View style={styles.imageContainer}>
+              <View style={styles.titlesubContainerStyle}>
+                  <Text style={styles.titleStyle}>President : Noureddine xxxx</Text>
+                  <Text style={styles.titleStyle}>Vice-President : KHAWLA xxxx</Text>
+                  <Text style={styles.titleStyle}>Secretaire : Amin xxxx</Text>
+                  <Text style={styles.titleStyle}>Tresorier : Asma xxxx</Text>
+              </View>
+              <Image style={styles.imageStyle} source={require('../assets/Nord-Quest.png')}/>
+          </View>
+          :
+          null
+          } 
+
         <View style={styles.pickerContainer}>
           <Picker
               onValueChange={(itemValue, itemIndex) => {
@@ -143,8 +162,29 @@ const styles = StyleSheet.create({
     ,
     TextStyle:{
       margin:20,
-      fontSize:17,
+      fontSize:15,
     }
+    ,
+  imageStyle:{
+    alignSelf:'flex-end',
+    height:22*vh,
+    width:25*vw,
+  }
+  ,
+  titlesubContainerStyle:{
+      flex:1,
+      paddingLeft:20,
+  }
+  ,
+  titleStyle:{
+    fontSize:16,
+    fontWeight:'bold'
+  }
+  ,
+  imageContainer:{
+    alignItems:'center',
+    flexDirection:'row',
+  }
 })
 
 export default repartition;

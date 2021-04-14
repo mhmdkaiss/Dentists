@@ -34,21 +34,19 @@ class SignIn extends React.Component {
     this.setState({loading:true})
     const {numero,password} = this.state;
 
-    if(numero==null){
+    if(numero=='' || password==''){
       this.setState({error:'Authentification erronée!',loading:false})
-    }
-    else{
-      const str1= numero;
-      const str2= '@france.com';
-      const numeroEmail= str1.concat(str2);
-
-      
-        auth().signInWithEmailAndPassword(numeroEmail,password)
-      .then(this.onLoginSuccess.bind(this))
-      .catch(()=>{
-      this.setState({error:'Authentication failed!',loading:false})
-    });
-    }
+      }
+      else{ 
+        const str1= numero;
+        const str2= '@france.com';
+        const numeroEmail= str1.concat(str2);
+          auth().signInWithEmailAndPassword(numeroEmail,password)
+          .then(this.onLoginSuccess.bind(this))
+          .catch(()=>{
+          this.setState({error:'Authentication failed!',loading:false})
+        });
+      }
    
   }
 
