@@ -4,6 +4,9 @@ import HButton from '../components/heartPage/HButton';
 import auth from '@react-native-firebase/auth';
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 
+import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize } from '@react-native-firebase/admob';
+
+
 class DrCharfi extends React.Component {  
 
   navigatetoDemandAtt(){
@@ -39,6 +42,7 @@ class DrCharfi extends React.Component {
                 <HButton label={'Notifications'} onButtonPress={this.navigatetoNotifications.bind(this)}/>
             </View>
         
+            <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.FULL_BANNER} />
         
         </View>
     
