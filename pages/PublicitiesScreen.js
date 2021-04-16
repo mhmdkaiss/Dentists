@@ -28,7 +28,7 @@ class Publicites extends React.Component {
         
         <View style={styles.containerForm}>
 
-          <Header Label={'Publiciteeee'}/>
+          <Header Label={'Publicite'}/>
 
          
           
