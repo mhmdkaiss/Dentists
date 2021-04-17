@@ -17,8 +17,8 @@ export default class UserProfileView extends Component {
                   source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
 
                 <Text style={styles.name}>Dentist </Text>
-                <Text style={styles.userInfo}>jhonnydoe@mail.com </Text>
-                <Text style={styles.userInfo}>Florida </Text>
+                <Text style={styles.userInfo}>Dentist@mail.com </Text>
+                <Text style={styles.userInfo}>Dentist </Text>
             </View>
           </View>
 

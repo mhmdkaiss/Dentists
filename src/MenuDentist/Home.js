@@ -9,7 +9,7 @@ import {drawerItemsMain} from './drawerItemsMain';
 import CustomDrawerContent from './CustomDrawerContent.js';
 import CustomHeader from './CustomHeader';
 //import Camera from '../Camera/Cameras'
-import Dashboard from '../Dashbord/Dashboard'
+import Dashboard from './Dashbord/Dashboard'
 
 const Drawer = createDrawerNavigator();
 function MainDrawerNavigation() {
