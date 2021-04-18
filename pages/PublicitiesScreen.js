@@ -3,6 +3,8 @@ import {View,Text, StyleSheet,Image, FlatList, ScrollView} from 'react-native';
 import database from '@react-native-firebase/database';
 import Header from '../components/header';
 import firestore from '@react-native-firebase/firestore';
+import VideoPlayer from 'react-native-video-player';
+var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 
 class Publicites extends React.Component { 
 
@@ -30,7 +32,7 @@ class Publicites extends React.Component {
 
           <Header Label={'Publicite'}/>
 
-         
+   
           
           <View style={styles.PublicitesStyleContainer}>
               <FlatList
@@ -41,12 +43,19 @@ class Publicites extends React.Component {
                         return(
                             <View style={styles.messagesContainerStyle}>
 
+                                {item.Video ?
+                                <VideoPlayer
+                                    video={{ uri: `${item.download}` }}
+                                    videoWidth={vh*8}
+                                    videoHeight={vh*10}
+                                    autoplay={true}
+                                />
+                                :
                                 <View style={styles.imageContainer}>
                                   <Image style={styles.imageStyle} source={{uri:`${item.download}`}}/>
                                 </View>
+                                }
 
-                                <Text style={styles.titleStyle}>{item.titlemessage}</Text>
-                                <Text style={styles.messageStyle}>{item.message}</Text>
                                 
                             </View>
                         ) 
@@ -71,7 +80,7 @@ const styles= StyleSheet.create({
   ,
   imageStyle:{
     alignSelf:'flex-end',
-    height:200,
+    height:vh*80,
     width:'100%',
     borderRadius:10
   }
