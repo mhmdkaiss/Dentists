@@ -3,6 +3,8 @@ import {View,Text, StyleSheet,Image,Button} from 'react-native';
 import HButton from '../components/heartPage/HButton';
 var {vw, vh, vmin, vmax} = require('react-native-viewport-units');
 
+import auth from '@react-native-firebase/auth';
+
 import { InterstitialAd, AdEventType, TestIds,RewardedAd, RewardedAdEventType} from '@react-native-firebase/admob';
 
 // ad unit ID :ca-app-pub-7105179578519852/5219868982
@@ -19,6 +21,7 @@ function RewardAd() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    
     const eventListener = rewarded.onAdEvent((type, error, reward) => {
       if (type === RewardedAdEventType.LOADED) {
         setLoaded(true);
@@ -68,6 +71,8 @@ function AdFullScreen() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    
+    
     const eventListener = interstitial.onAdEvent(type => {
       if (type === AdEventType.LOADED) {
         setLoaded(true);
@@ -116,8 +121,17 @@ class HeartPage extends React.Component {
   navigatetoViewAtt(){
     this.props.navigation.navigate('ViewAttestationPage');
   }
+
+  checkifLoggedIn(){
+    if(auth().currentUser!=null){
+      return true;
+    }
+    else return false
+  }
  
   render(){
+    const test = 
+    console.log(test)
       return (
         
         <View style={styles.containerForm}>
@@ -132,7 +146,10 @@ class HeartPage extends React.Component {
               <HButton label={'Actualités'} onButtonPress={this.navigatetoActualite.bind(this)}/>
               <HButton label={'Documents Pratiques'} onButtonPress={this.navigatetoDocuments.bind(this)}/>
               <HButton label={'Repartition'} onButtonPress={this.navigatetoRepartition.bind(this)}/>
+              { this.checkifLoggedIn()? 
               <HButton label={'View Attestations'} onButtonPress={this.navigatetoViewAtt.bind(this)}/>
+                : null}
+              
           </View>
         
         <AdFullScreen/>

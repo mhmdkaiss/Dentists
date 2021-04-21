@@ -44,11 +44,11 @@ class typedattestation extends React.Component {
     const {typeofAttestation,envoyerMail,envoyerPoste,currentEmail} = this.state;
 
     Alert.alert(
-      'Supprimer cet élément',
+      'Envoyer demande',
       '',
       [
         {
-          text:'SUPPRIMER',
+          text:'Envoyer',
           onPress:()=>
           {
             database()

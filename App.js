@@ -39,7 +39,7 @@ function HeartStackScreen() {
     <HomeStack.Navigator>
 
       <HomeStack.Screen name="HeartPage" component={HeartPage} options={{headerShown: false}}/>
-      <HomeStack.Screen name="ActualitePage" component={ActualitePage} options={{headerTitle: null}}/>
+      <HomeStack.Screen name="ActualitePage" component={ActualitePage} options={{headerTitle: 'Actualités'}}/>
       <HomeStack.Screen name="DocumentsPage" component={DocumentsPage} options={{headerTitle: null}}/>
       <HomeStack.Screen name="RepartitionPage" component={repartition} options={{headerTitle: null}}/>
       <HomeStack.Screen name="ViewAttestationPage" component={ViewAttestation} options={{headerTitle: null}}/>
@@ -54,6 +54,19 @@ function WhenNotSignedIn(){
     <HomeStack.Screen name="SignUp" component={RegistrationForm} options={{headerShown: false}}/>
     <HomeStack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
     <HomeStack.Screen name="DrCharfi" component={DrCharfi} options={{headerShown: false}}/>
+  </HomeStack.Navigator>
+  )
+}
+
+function WhenNotSignedInHeart(){
+  return(
+    <HomeStack.Navigator>
+
+    <HomeStack.Screen name="HeartPage" component={HeartPage} options={{headerShown: false}}/>
+    <HomeStack.Screen name="ActualitePage" component={ActualitePage} options={{headerTitle: null}}/>
+    <HomeStack.Screen name="DocumentsPage" component={DocumentsPage} options={{headerTitle: null}}/>
+    <HomeStack.Screen name="RepartitionPage" component={repartition} options={{headerTitle: null}}/>
+    <HomeStack.Screen name="ViewAttestationPage" component={ViewAttestation} options={{headerTitle: null}}/>
   </HomeStack.Navigator>
   )
 }
@@ -161,7 +174,7 @@ class App extends React.Component{
                   }} 
                  >
             <Tab.Screen name="Home" component={WhenNotSignedIn} />
-            <Tab.Screen name="Settings" component={repartition} />
+            <Tab.Screen name="Settings" component={WhenNotSignedInHeart} />
             <Tab.Screen name="Locations" component={Publicites} />
           </Tab.Navigator>
          
